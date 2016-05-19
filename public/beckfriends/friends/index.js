@@ -879,8 +879,8 @@ function move(num) {
 			geoQuery.updateCriteria({radius: 60});
 		}else{
 		$('#map').plainOverlay('hide');
-		setTimeout(function(){swal({   title: "No Live Requests",   text: "Presently there are no live requests around this location. You can add a request here if you want or search live requests for another location",   timer: 8000 });
-		document.getElementById("pckgctr").innerHTML = "No Requests Found"},3000);
+		setTimeout(function(){swal({   title: "No Live Requests",   text: "Presently there are no live requests around this location. You can add a request here if you want or search live requests for another location",   type: "warning", showCancelButton: false });
+		},3000);
 		document.getElementById("rqstgist").style.display="none";
 		}
 		
@@ -1087,7 +1087,7 @@ function move(num) {
 	
 	function receipt(){
 		phoneNumDelv = document.getElementById("deliverynum").value.replace(/[^\d]/g, '');
-		if(document.getElementById('deliveryarea').value=="" || document.getElementById('deliveryname').value=="" || document.getElementById('deliverynum').value==""){
+		if(document.getElementById("deliveryaddr").value || document.getElementById('deliveryarea').value=="" || document.getElementById('deliveryname').value=="" || document.getElementById('deliverynum').value==""){
 			swal({   title: "DELIVERY DETAILS",   text: "Please fill all Pickup Details",   type: "error",   confirmButtonText: "OK" });
 		}		
 		else if(phoneNumDelv.length < 10) {
@@ -1274,7 +1274,7 @@ function move(num) {
 	var phoneNumPick, phoneNumDelv;
 	function showdelivery(){
 		phoneNumPick = document.getElementById("pickupnum").value.replace(/[^\d]/g, '');
-		if(document.getElementById('pickuparea').value=="" || document.getElementById('pickupname').value=="" || document.getElementById('pickupnum').value==""){
+		if(document.getElementById("pickupaddr").value || document.getElementById('pickuparea').value=="" || document.getElementById('pickupname').value=="" || document.getElementById('pickupnum').value==""){
 			swal({   title: "PICKUP DETAILS",   text: "Please fill all Pickup Details",   type: "error",   confirmButtonText: "OK" });
 		}		
 		else if(phoneNumPick.length < 10) {

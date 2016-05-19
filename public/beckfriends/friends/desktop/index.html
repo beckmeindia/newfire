@@ -883,7 +883,7 @@ input:focus {
   .inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
     color: red; }
 	#map{
-      height: 30em;
+      height: 28.25em;
 	  margin:0px 10px 10px 10px;
 	  border-radius:3px
 	}
@@ -1138,9 +1138,9 @@ input:focus {
   </md-card>
   </div>
   <div  flex flex-xs="" flex-gt-xs="30">
-    <md-card layout-fill layout-wrap id="rqstgist" style="max-width:25em;height:35.8em;margin:0px;margin-top:14px;padding-bottom:1px;box-shadow:0px 20px 10px 0px rgba(0, 0, 0, 0.15)">
+    <md-card layout-fill layout-wrap id="rqstgist" style="max-width:25em;height:34em;margin:0px;margin-top:14px;padding-bottom:1px;box-shadow:0px 20px 10px 0px rgba(0, 0, 0, 0.15)">
 		<div style="border-top-right-radius:2px;height:12.5em;width:100%;background:#fff;background-size:contain; background-repeat:no-repeat; background-position:center;" id="tflbckg"></div>	  
-        <md-card-header style="padding:15px 40px 15px 20px; border-top:1px solid #eaeaea; background-color:#ebf7fc">
+        <md-card-header style="padding:10px 40px 10px 20px; border-top:1px solid #eaeaea; background-color:#ebf7fc">
           <md-card-avatar style="padding-top:0.3em">
             <md-icon md-svg-icon="moneyz.svg" style="padding:0;background:#ebf7fc;color:#000"></md-icon>
           </md-card-avatar>
@@ -1152,7 +1152,7 @@ input:focus {
         <md-card-content style="padding:0px">
 		 <md-divider></md-divider>
         <md-content>		
-      <md-list flex style="padding:1em 0">       
+      <md-list flex style="padding:0.5em 0">       
         <md-list-item class="md-2-line">
           <div class="md-list-item-text" style="margin:0;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;width: 300px;">
             <p style="font-size:1em;color:#16a765;font-weight:normal">Pickup Area</p>
@@ -1173,7 +1173,7 @@ input:focus {
         </md-list-item>
       </md-list>
     </md-content>
-  	<md-button id="accepting" class="md-raised md-primary" style="width:90%;margin-top:1em;margin-left:5%" ng-click="accept2()">ACCEPT</md-button>			
+  	<md-button id="accepting" class="md-raised md-primary" style="width:90%;margin-top:0;margin-left:5%" ng-click="accept2()">ACCEPT</md-button>			
 		</md-card-content>	
        	<md-card-actions layout="row" layout-align="center">
 			<md-button id="prevbtn" style="display:none" onclick="showprev()">Previous</md-button>
@@ -1182,16 +1182,16 @@ input:focus {
     </md-card>  
   </div>    
     <div flex flex-xs="" flex-gt-xs="40" style="max-width:40em;background-color:transparent;padding:0 1em">
-    <md-card layout-fill layout-wrap style="height:35.8em;margin-top:0.85em;padding:0.3em;padding-top:0;min-width:28em;box-shadow:0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15)">
+    <md-card layout-fill layout-wrap style="height:34em;margin-top:0.85em;padding:0.3em;padding-top:0;min-width:28em;box-shadow:0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15)">
 	   <md-card-header>         
           <md-card-header-text style="text-align:center">
-			<span class="md-subhead">Want something delivered ?</span>
+			<span class="md-subhead" style="font-size:1em">Want something delivered ?</span>
             <span id="tytl" class="md-title" style="font-weight:normal;color:#d80000"></span>            
           </md-card-header-text>
         </md-card-header>
 		  <div id="card" style="height:12.5em;width:90%;margin-left:5%;background:#eee;display:none"><div id="packagephoto" style="left:0; right:0; bottom:0; margin:auto; margin-top:90px; max-width:100%; max-height:200px; overflow:auto;color:#888;font-size:18px;height:30px;z-index:1;text-align:center;letter-spacing:1px" onclick="document.getElementById('files').click()">ADD PACKAGE PHOTO</div>
 	  	<input type="file" id="files" name="upload" style="z-index:999;width:97%;height:12.5em; opacity: 0;-moz-opacity: 0;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);"/></div>
-    <div layout="row" id="pckginfo">
+    <div layout="row" id="pckginfo" style="padding:1em 0">
 	   <div flex>
        <md-card-content style="padding:0.4em 0.5em 0.4em 2em">
         <md-content id="lala">
@@ -1224,10 +1224,10 @@ input:focus {
   <option value="50 Kgs & more">50 Kgs & more</option>
 	</select>
     </md-input-container>
-	<md-input-container class="md-block" style="margin:10px 0px 0px 0px">
+	<!--md-input-container class="md-block" style="margin:10px 0px 0px 0px">
       <label>Item Value</label>
 	  <input id="itmval" type="text" ng-required="true">
-    </md-input-container>
+    </md-input-container-->
 	</md-content>
 	</md-card-content>
 	</div>
@@ -1266,10 +1266,10 @@ input:focus {
 	<option value="HUGE (FITS IN TRUCK)">HUGE(FITS IN TRUCK)</option>
 	</select>
     </md-input-container>
-	<md-input-container class="md-block" style="margin:10px 0px 0px 0px">
+	<!--md-input-container class="md-block" style="margin:10px 0px 0px 0px">
       <label>Item Volume</label>
 	  <input id="itmvol" type="text" ng-required="true">
-    </md-input-container>
+    </md-input-container-->
 	</md-content>
 	</md-card-content>
 	</div>	
