@@ -367,7 +367,7 @@ function move(num) {
 			for (var i = 0; i < hotSpotMapMarkers.length; i++)
 			hotSpotMapMarkers[i].setMap(null);
 		  //document.getElementById("rqstgist").style.display="none";
-		  google.maps.event.trigger(map, 'resize');
+		  //google.maps.event.trigger(map, 'resize');
 		  rsltshow = 0;
 		  if(path) path.setMap(null);
 		  map.setCenter(center);map.setZoom(12); ntfnd=0;
@@ -457,7 +457,6 @@ var nofkeys=0;
 		}else if (geoQuery.radius()==30){
 			geoQuery.updateCriteria({radius: 60});
 		}else{
-		$('#map').plainOverlay('hide');
 		setTimeout(function(){swal({   title: "No Live Requests",   text: "Presently there are no live requests around this location. You can add a request here if you want or search live requests for another location",   timer: 8000 });
 		document.getElementById("pckgctr").innerHTML = "No Requests Found";
 		document.getElementById("ppickup").innerHTML = '<img src="line.png" style="width:100%;display:inline;">';
@@ -473,13 +472,7 @@ var nofkeys=0;
 	var interval = setInterval(function(){
 	if(arrPckgs.length == nofkeys && nofkeys!=0 && acceptsloaded==1){			
 		clearInterval(interval);
-		if(flgg==0)
-		{
-		$('#map').plainOverlay('show',{
-			opacity:0.8,
-			fillColor: '#000',
-			progress: function() { return $('<div style="font-size:26px;color:#fff;font-weight:bold;text-align:center">Customizing Requests<br> for your account...</div>'); }
-		});
+		if(flgg==0){
 			flgg=1;
 		}
 		for (var key in arraccepts) {forcekeyexit(arraccepts[key])};
@@ -500,7 +493,7 @@ var nofkeys=0;
 			rfrshresults(mycenter);
 			for (var i = 0; i < hotSpotMapMarkers.length; i++)
 			hotSpotMapMarkers[i].setMap(null);
-		   google.maps.event.trigger(map, 'resize');
+		   //google.maps.event.trigger(map, 'resize');
 		  rsltshow = 0;
 		  if(path) path.setMap(null);
 		  map.setCenter(mycenter);map.setZoom(12);ntfnd=0;
@@ -517,9 +510,8 @@ var nofkeys=0;
 		}else if(geoQuery.radius()==3500){
 			geoQuery.updateCriteria({radius: 5000});
 		}else{
-			$('#map').plainOverlay('hide');
-			document.getElementById("pckgctr").innerHTML = "No Requests Found";
-			document.getElementById("ppickup").innerHTML = '<img src="line.png" style="width:100%;display:inline;">';
+		document.getElementById("pckgctr").innerHTML = "No Requests Found";
+		document.getElementById("ppickup").innerHTML = '<img src="line.png" style="width:100%;display:inline;">';
 		document.getElementById("pdelv").innerHTML = '<img src="line.png" style="width:100%;display:inline;">';
 		document.getElementById("pdatetym").innerHTML = '<img src="line.png" style="width:100%;display:inline;">';
 		document.getElementById("psize").innerHTML = '<img src="line.png" style="width:100%;display:inline;">';
@@ -528,7 +520,6 @@ var nofkeys=0;
 		setTimeout(function(){swal({   title: "No Live Requests",   text: "Presently there are no live requests around this location. You can add a request here if you want or search live requests for another location",   timer: 8000 })},3000);		
 		}	
     	}else{
-			$('#map').plainOverlay('hide');
 			document.getElementById("prevbtn").style.display="none"; showreslt(0);
 			drawroute(arrPckgs[0].pickuplat, arrPckgs[0].pickuplng, arrPckgs[0].delvlat, arrPckgs[0].delvlng);	
 		}
@@ -780,7 +771,6 @@ $(document).ready(function(){
 			var address = ''; rsltshow = 0;
 			$("#tflbckg").css("background-image", "url('preloader.gif')");
 			document.getElementById("mnuitm2").style.display="block";	
-			$('#map').plainOverlay('show',{opacity:0.8, fillColor: '#000', progress: function() { return $('<div style="font-size:40px;color:#fff;font-weight:bold">Loading...</div>') }});
 			document.getElementById("lastbit").style.display="block";
 			document.getElementById("searchloc").value = sessionStorage.getItem("startlocaddr");
 	}else{		
@@ -884,7 +874,7 @@ $(document).ready(function(){
 		});
 		setTimeout(function(){
 		rfrshresults(mycenter);
-		google.maps.event.trigger(map, 'resize');
+		//google.maps.event.trigger(map, 'resize');
 		document.getElementById("packagephoto").style.display = "block"; document.getElementById("descriptor").value = "";
 		shwdetls();
 		$("#card").css("background-image", "");
@@ -1383,10 +1373,11 @@ $(document).ready(function(){
 	for (var i = 0; i < hotSpotMapMarkers.length; i++)
     hotSpotMapMarkers[i].setMap(null);
 	var flightPlanCoordinates = [{lat:picklat,lng:picklng},{lat:delvlat,lng:delvlng}];
+	
 	var latlngbounds = new google.maps.LatLngBounds();
 	latlngbounds.extend(new google.maps.LatLng(picklat,picklng));
 	latlngbounds.extend(new google.maps.LatLng(delvlat,delvlng));
-
+	
 	var polyLine = new google.maps.Polyline({
     path: flightPlanCoordinates,
     strokeColor: "#2bb1de",
@@ -1410,6 +1401,7 @@ $(document).ready(function(){
 	icon: "package_red.png",
     map: map
 	}));
+	
 	map.fitBounds(latlngbounds);
 	}
 	
@@ -1704,12 +1696,11 @@ $(document).ready(function(){
 			hotSpotMapMarkers[i].setMap(null);
 			if(path) path.setMap(null); 
 			document.getElementById("pckgctr").innerHTML="Loading...";
-			var address = ''; rsltshow = 0; google.maps.event.trigger(map, 'resize');
+			var address = ''; rsltshow = 0; //google.maps.event.trigger(map, 'resize');
 			$("#tflbckg").css("background-image", "url('preloader.gif')");
 			$('#namehdr2').trigger('click');			
 			document.getElementById("mnuitm2").style.display="block";	
 			$('.close-initModal').trigger('click');		
-			$('#map').plainOverlay('show',{opacity:0.8, fillColor: '#000', progress: function() { return $('<div style="font-size:40px;color:#fff;font-weight:bold">Loading...</div>') }});
 			document.getElementById("lastbit").style.display="block";
 			document.getElementById("searchloc").value = document.getElementById("searchlocinit").value;
 			if(isLocalStorageNameSupported()){
@@ -1752,14 +1743,13 @@ $(document).ready(function(){
 			if(path) path.setMap(null); 
 			//document.getElementById("rqstgist").style.display="none";
 			document.getElementById("pckgctr").innerHTML="Loading...";
-			var address = ''; rsltshow = 0; google.maps.event.trigger(map, 'resize');
+			var address = ''; rsltshow = 0; //google.maps.event.trigger(map, 'resize');
 			$("#tflbckg").css("background-image", "url('preloader.gif')");
 			document.getElementById("pfare").innerHTML = '';
 			document.getElementById("psize").innerHTML = '<img src="line.png" style="width:70%;display:inline;">';
 			document.getElementById("ppickup").innerHTML = '<img src="line.png" style="width:100%;display:inline;">';
 			document.getElementById("pdelv").innerHTML = '<img src="line.png" style="width:100%;display:inline;">';
 			document.getElementById("pdatetym").innerHTML = '<img src="line.png" style="width:100%;display:inline;">';
-			$('#map').plainOverlay('show',{opacity:0.8, fillColor: '#000', progress: function() { return $('<div style="font-size:40px;color:#fff;font-weight:bold">Loading...</div>') }});
 			if (place.address_components) {
             address = [
               (place.address_components[0] && place.address_components[0].short_name || ''),

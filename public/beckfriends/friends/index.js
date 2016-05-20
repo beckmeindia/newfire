@@ -7,7 +7,7 @@
 	var usrimg = "data:image/jpeg;base64,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";
 	var arrPckgs = [], rsltshow = 0, arraccepts = [], revrsdone = 0, mycenter, lognclckd = 0, flgg=0, postctr = 0, acceptctr = 0;
 	var newflg=0; var unverf = 0; var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
-
+	var startlat,startlng,endlat,endlng;
 	app.controller('AppController', ["$scope", "$firebaseArray", "$firebaseObject", function($scope, $firebaseArray, $firebaseObject) {
 		$scope.post2 = function(){
 			postctr = 1;
@@ -190,13 +190,14 @@
 		$scope.routes = $firebaseArray(firebaseRef.child("users").child(usrid).child("account").child("routes"));
 		$scope.addRoute = function() {
 		if(unverf==0){
-			if(document.getElementById("strtloc").value=="" || document.getElementById("endloc").value==""){
+			if(document.getElementById("startarea").value=="" || document.getElementById("endarea").value==""){
 				swal({   title: "Route Locations",   text: "Please add both the starting and ending locations of your route",   type: "error",   confirmButtonText: "Ok" });
 			}else if(startlat==0 || endlat==0 || startlng==0 || endlng==0){
 				swal({   title: "Route Locations",   text: "For starting and ending lcoations, please select from the results that appear",   type: "error",   confirmButtonText: "Ok" });
 			}else{
+			var	strtlocaddr = document.getElementById("startarea").value; var endlocaddr = document.getElementById("endarea").value;
 			$scope.routes.$add({ startlat:startlat, startlng:startlng, strtlocaddr:strtlocaddr, endlat:endlat, endlng:endlng, endlocaddr:endlocaddr});
-			document.getElementById("strtloc").value = ""; document.getElementById("endloc").value = "";
+			document.getElementById("startarea").value = ""; document.getElementById("endarea").value = "";
 			startlat=0; startlng=0; strtlocaddr="";endlat=0; endlng=0; endlocaddr=""; calcpercent();
 			}		
 		}else{
@@ -236,6 +237,7 @@ $(document).ready(function($){
 			window.history.pushState({id: 'BECK'}, 'BECK Friends', 'https://www.beckfriends.com/friends/');	
 		}		
 	}
+	
 	
 	var $form_modal = $('.cd-user-modal'),
 		$form_login = $form_modal.find('#cd-login'),
@@ -334,6 +336,31 @@ jQuery.fn.putCursorAtEnd = function() {
     	}
 	});
 };
+
+	function rotatethis(){
+		swal({   title: "Rotate Image",   text: "Are you sure you want to rotate this image by 90 degrees?",   type: "warning",   showCancelButton: true,   confirmButtonColor: "#AEDEF4",   confirmButtonText: "Yes",   closeOnConfirm: true }, function(){ rotateBase64Image(img64, 'callback');   swal("Rotation", "Your image is being rotated!", "success"); });
+	}
+	
+	function rotateBase64Image(base64data, callback) {
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext("2d");
+
+    var image = new Image();
+    image.src = base64data;
+    image.onload = function() {
+		canvas.width = image.height;
+    canvas.height = image.width;
+    ctx.rotate(90 * Math.PI / 180);
+    ctx.translate(0, -canvas.width);
+    ctx.drawImage(image, 0, 0); window.eval(""+callback+"('"+canvas.toDataURL('image/jpeg')+"')");
+    };
+
+	}
+	
+	
+	function callback(base64data) {	img64 = base64data;
+	 document.getElementById("card").style.backgroundImage = "url('"+img64+"')";
+		document.getElementById("card").style.backgroundSize = "contain"; document.getElementById("card").style.backgroundPosition = "center"; document.getElementById("card").style.backgroundRepeat = "no-repeat"; }
 	
 	function openposts(){
 		myNavigator.pushPage('posted.html', { animation : 'push' } );
@@ -356,7 +383,7 @@ jQuery.fn.putCursorAtEnd = function() {
    }
 }
 	function exit(){
-		swal({   title: "Are you sure?",   text: "You will lose the data you added for this request",   type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",   confirmButtonText: "Yes, go back",   closeOnConfirm: true }, function(){   myNavigator.popPage('page1.html', { animation : 'lift' } ); google.maps.event.trigger(map, 'resize'); });
+		swal({   title: "Are you sure?",   text: "You will lose the data you added for this request",   type: "warning",   showCancelButton: true,   confirmButtonColor: "#880000",   confirmButtonText: "Yes, go back",   closeOnConfirm: true }, function(){   myNavigator.popPage('page1.html', { animation : 'lift' } ); google.maps.event.trigger(map, 'resize'); });
 	}
 	
 	  function smsmatchdmnd(number,name1,num1){
@@ -575,18 +602,24 @@ geoQuery.on("key_exited", function(vehicleId, vehicleLocation) {
 	var percentage = 0;
 	firebaseRef.child("users").child(usrid).child("account").once("value", function(dataSnapshot) {
 		if(dataSnapshot.child("facebook").val()){
-			percentage += 10;
+			percentage += 10; document.getElementById("fbnotconn").style.display="none"; document.getElementById("fbconn").style.display="block";
 		} if(dataSnapshot.child("google").val()){
-			percentage += 10;
+			percentage += 10; document.getElementById("googlnotconn").style.display="none"; document.getElementById("googlconn").style.display="block";
 		} if(dataSnapshot.child("linkedin").val()){
-			percentage += 10;
+			percentage += 10; document.getElementById("linkdnotconn").style.display="none"; document.getElementById("linkdconn").style.display="block";
 		} if(dataSnapshot.child("routes").val()){
 			if((dataSnapshot.child("routes").numChildren())*5 >= 20){
-				percentage += 20;
+				percentage += 20; 
 			}else{
 				percentage += (dataSnapshot.child("routes").numChildren())*5;
 			}			
-		} if(dataSnapshot.child("idverify").val()){
+		}if(dataSnapshot.child("idforverify").child("first").val()){
+			document.getElementById("verifbckg1").style.background = "url('"+dataSnapshot.child("idforverify").child("first").val()+"') center/contain no-repeat";
+			document.getElementById("verfwrt").style.display = "none";
+		}if(dataSnapshot.child("idforverify").child("second").val()){
+			document.getElementById("verifbckg2").style.background = "url('"+dataSnapshot.child("idforverify").child("second").val()+"') center/contain no-repeat";
+			document.getElementById("verfwrt2").style.display = "none";
+		}if(dataSnapshot.child("idverify").val()){
 			percentage += (dataSnapshot.child("idverify").numChildren())*15;
 		} if(dataSnapshot.child("usrphone").val()){
 			percentage += 20;
@@ -763,11 +796,6 @@ function move(num) {
 		setTimeout(function(){document.getElementsByTagName("body")[0].style.display='block'},100);
 		map.setZoom(11); ntfnd = 0;		
 		getReverseGeocodingData(position.coords.latitude, position.coords.longitude);
-		$('#map').plainOverlay('show',{
-			opacity:0.5,
-			fillColor: '#000',
-			progress: function() { return $('<div style="font-size:26px;color:#fff;font-weight:bold;text-align:center">Loading...</div>'); }
-		});
 		geoQuery.updateCriteria({center: [position.coords.latitude, position.coords.longitude],  radius: 30});
 	}
 	 /*
@@ -826,7 +854,7 @@ function move(num) {
 	}
    */
 	function onerror(err){		
-		ntfnd = 1;setTimeout(function(){document.getElementsByTagName("body")[0].style.display='block'},100); loadauto2();			
+		ntfnd = 1; document.getElementsByTagName("body")[0].style.display='block'; loadauto2();			
 	}
 	
 	function loadauto2(){
@@ -856,12 +884,7 @@ function move(num) {
 	setTimeout(function(){
 		  google.maps.event.trigger(map, 'resize');
 		 map.setCenter(center);map.setZoom(11);
-		 $('#map').plainOverlay('show',{
-			opacity:0.5,
-			fillColor: '#000',
-			progress: function() { return $('<div style="font-size:26px;color:#fff;font-weight:bold;text-align:center">Loading...</div>'); }
-		});
-		  geoQuery.updateCriteria({center: [center.lat(), center.lng()],  radius: 30});
+		geoQuery.updateCriteria({center: [center.lat(), center.lng()],  radius: 30});
 		// showtour();
 	  },1500)
     }	
@@ -878,7 +901,6 @@ function move(num) {
 		}else if (geoQuery.radius()==30){
 			geoQuery.updateCriteria({radius: 60});
 		}else{
-		$('#map').plainOverlay('hide');
 		setTimeout(function(){swal({   title: "No Live Requests",   text: "Presently there are no live requests around this location. You can add a request here if you want or search live requests for another location",   type: "warning", showCancelButton: false });
 		},3000);
 		document.getElementById("rqstgist").style.display="none";
@@ -888,15 +910,8 @@ function move(num) {
 	var interval = setInterval(function(){
 	if(arrPckgs.length == nofkeys && nofkeys!=0 && acceptsloaded==1){			
 		clearInterval(interval);
-		$('#map').plainOverlay('hide');
 		if(flgg==0)
-		{
-		$('#map').plainOverlay('show',{
-			opacity:0.5,
-			fillColor: '#000',
-			progress: function() { return $('<div style="font-size:26px;color:#fff;font-weight:bold;text-align:center">Customizing Requests<br> for your account...</div>'); }
-		});
-			flgg=1;
+		{flgg=1;
 		}
 		for (var key in arraccepts) {forcekeyexit(arraccepts[key])};
 		arrPckgs.sort(function(a, b) {
@@ -933,12 +948,10 @@ function move(num) {
 		}else if(geoQuery.radius()==3500){
 			geoQuery.updateCriteria({radius: 5000});
 		}else{
-			$('#map').plainOverlay('hide');
-			document.getElementById("pckgctr").innerHTML = "No Requests Found";
+		document.getElementById("pckgctr").innerHTML = "No Requests Found";
 		setTimeout(function(){swal({   title: "No Live Requests",   text: "Presently there are no live requests around this location. You can add a request here if you want or search live requests for another location",   timer: 8000 })},3000);		
 		}	
     	}else{
-			$('#map').plainOverlay('hide');
 			document.getElementById("prevbtn").style.display="none"; showreslt(0);
 			drawroute(arrPckgs[0].pickuplat, arrPckgs[0].pickuplng, arrPckgs[0].delvlat, arrPckgs[0].delvlng);	
 		}
@@ -950,18 +963,21 @@ function move(num) {
 	
 	function showbasic(){
 		document.getElementById("basic").style.display="block";
+		document.getElementById("profile_bit").style.display="block";
 		document.getElementById("routes").style.display="none";
 		document.getElementById("verf").style.display="none";
 	}
 	
 	function showverf(){
 		document.getElementById("basic").style.display="none";
+		document.getElementById("profile_bit").style.display="none";
 		document.getElementById("routes").style.display="none";
 		document.getElementById("verf").style.display="block";
 	}
 	
 	function showroutes(){
 		document.getElementById("basic").style.display="none";
+		document.getElementById("profile_bit").style.display="none";
 		document.getElementById("routes").style.display="block";
 		document.getElementById("verf").style.display="none";
 	}
@@ -975,12 +991,7 @@ function move(num) {
 		  google.maps.event.trigger(map, 'resize');
 		  rsltshow = 0;
 		  path.setMap(null);
-		  map.setCenter(center);map.setZoom(12); ntfnd=0;
-		  $('#map').plainOverlay('show',{
-			opacity:0.5,
-			fillColor: '#000',
-			progress: function() { return $('<div style="font-size:26px;color:#fff;font-weight:bold;text-align:center">Loading...</div>'); }
-		});
+		  map.setCenter(center);map.setZoom(12); ntfnd=0;		
 		  geoQuery.updateCriteria({center: [center.lat(), center.lng()],radius:30});
     }
 	
@@ -1023,6 +1034,16 @@ function move(num) {
 	else if(autoflag==2){
 		document.getElementById("deliveryarea").value=document.getElementById("pac-input").value;;
 		delvlat = center.lat(); delvlng = center.lng();
+		myNavigator.popPage('page3.html', { animation : 'lift' } );
+	}
+	else if(autoflag==3){
+		document.getElementById("startarea").value=document.getElementById("pac-input").value;;
+		startlat = center.lat(); startlng = center.lng();
+		myNavigator.popPage('page3.html', { animation : 'lift' } );
+	}
+	else if(autoflag==4){
+		document.getElementById("endarea").value=document.getElementById("pac-input").value;;
+		endlat = center.lat(); endlng = center.lng();
 		myNavigator.popPage('page3.html', { animation : 'lift' } );
 	}
     }	
@@ -1087,8 +1108,8 @@ function move(num) {
 	
 	function receipt(){
 		phoneNumDelv = document.getElementById("deliverynum").value.replace(/[^\d]/g, '');
-		if(document.getElementById("deliveryaddr").value || document.getElementById('deliveryarea').value=="" || document.getElementById('deliveryname').value=="" || document.getElementById('deliverynum').value==""){
-			swal({   title: "DELIVERY DETAILS",   text: "Please fill all Pickup Details",   type: "error",   confirmButtonText: "OK" });
+		if(document.getElementById("deliveryaddr").value=="" || document.getElementById('deliveryarea').value=="" || document.getElementById('deliveryname').value=="" || document.getElementById('deliverynum').value==""){
+			swal({   title: "DELIVERY DETAILS",   text: "Please fill all Delivery Details",   type: "error",   confirmButtonText: "OK" });
 		}		
 		else if(phoneNumDelv.length < 10) {
 			swal({   title: "INVALID MOBILE NO.",   text: "Please enter a valid 10-digit mobile number at delivery location",   type: "error",   confirmButtonText: "OK" });
@@ -1097,6 +1118,7 @@ function move(num) {
 			swal({   title: "ADD PACKAGE PHOTO",   text: "Please add photo of your package at the top",   type: "error",   confirmButtonText: "OK" });
 		}		
 		else{
+			document.getElementById("rotatebtn").style.display = "none";
 			deliveryarea = document.getElementById("deliveryarea").value;
 			deliveryname = document.getElementById("deliveryname").value;
 			deliverynum = document.getElementById("deliverynum").value;
@@ -1260,21 +1282,51 @@ function move(num) {
 	
 	function resizeImage(img) {
     img64 = imageToDataUri(img);		
-/*	if(img64=="data:,"||img64=="data:image/jpeg;"){
-		img64="";
-		sweetAlert("Oops...", "There is some problem with this image. Please select the image again or another one that is similar", "error");
-	}else{	
-*/	
-		document.getElementById("packagephoto").style.display = "none";
-        document.getElementById("card").style.backgroundImage = "url('"+img64+"')";
-		document.getElementById("card").style.backgroundSize = "contain"; document.getElementById("card").style.backgroundPosition = "center"; document.getElementById("card").style.backgroundRepeat = "no-repeat";
-	//}
+	document.getElementById("packagephoto").style.display = "none";
+    document.getElementById("card").style.backgroundImage = "url('"+img64+"')";
+	document.getElementById("card").style.backgroundSize = "contain"; document.getElementById("card").style.backgroundPosition = "center"; document.getElementById("card").style.backgroundRepeat = "no-repeat";
 	}
-		
+	
+	
+	function resizeImage2(img) {
+    verf1 = imageToDataUri(img);			
+		setTimeout(function(){
+		if(verf1=="" || verf1=="data:," || verf1=="data:image/jpeg;"){
+		verf1="";
+		sweetAlert("Oops...", "There is some problem uploading this image. Please Try this image again or another one that is similar", "error");
+		}else{
+		document.getElementById("verfwrt").style.display = "none";
+        document.getElementById("verifbckg1").style.background = "url('"+verf1+"') center/contain no-repeat";
+		firebaseRef.child("users").child(usrid).child("account").child("idforverify").update({first:verf1});
+		setTimeout(function(){
+		swal("Good job!", "First verification document uploaded! We shall let you know once it's approved", "success");
+		},2000)
+		}
+		},2000)
+	}
+	
+	function resizeImage3(img) {
+    verf2 = imageToDataUri(img);			
+		setTimeout(function(){
+		if(verf2=="" || verf2=="data:," || verf2=="data:image/jpeg;"){
+		verf2="";
+		sweetAlert("Oops...", "There is some problem uploading this image. Please Try this image again or another one that is similar", "error");
+		}else{
+		document.getElementById("verfwrt2").style.display = "none";
+        document.getElementById("verifbckg2").style.background = "url('"+verf2+"') center/contain no-repeat";
+		firebaseRef.child("users").child(usrid).child("account").child("idforverify").update({second:verf2});
+		setTimeout(function(){
+		swal("Good job!", "Second verification document uploaded! We shall let you know once it's approved", "success");
+		},2000);
+		}
+		},2000)
+	}
+	
+	
 	var phoneNumPick, phoneNumDelv;
 	function showdelivery(){
 		phoneNumPick = document.getElementById("pickupnum").value.replace(/[^\d]/g, '');
-		if(document.getElementById("pickupaddr").value || document.getElementById('pickuparea').value=="" || document.getElementById('pickupname').value=="" || document.getElementById('pickupnum').value==""){
+		if(document.getElementById("pickupaddr").value=="" || document.getElementById('pickuparea').value=="" || document.getElementById('pickupname').value=="" || document.getElementById('pickupnum').value==""){
 			swal({   title: "PICKUP DETAILS",   text: "Please fill all Pickup Details",   type: "error",   confirmButtonText: "OK" });
 		}		
 		else if(phoneNumPick.length < 10) {
@@ -1341,7 +1393,39 @@ function move(num) {
 		if(loggedin==1){sidebar.toggleMenu();setTimeout(function(){ myNavigator.pushPage('profile.html', { animation : 'push' } ); 
 		setTimeout(function(){ 
 		startApp(); calcpercent(); document.getElementById("profile_name2").innerHTML = usrname;  document.getElementById("prfimg2").src = usrimg; 
-		},500);
+		
+	document.getElementById("verf1").onchange = function () {
+	if(unverf==0){
+    reader2 = new FileReader();
+    reader2.onload = function (e) {
+	var imgbckz = new Image();
+	imgbckz.src = String(e.target.result);
+	imgbckz.onload = function(){
+	resizeImage2(imgbckz)	
+	};
+	};
+    reader2.readAsDataURL(this.files[0]);
+	}else{
+		sweetAlert("Oops...", "Please verify your Email first!", "error");
+		}
+	}	
+	
+	document.getElementById("verf2").onchange = function () {
+	if(unverf==0){
+    reader3 = new FileReader();
+    reader3.onload = function (e) {
+	var imgbckz = new Image();
+	imgbckz.src = String(e.target.result);
+	imgbckz.onload = function(){
+	resizeImage3(imgbckz)	
+	};
+	};
+    reader3.readAsDataURL(this.files[0]);
+	}else{
+		sweetAlert("Oops...", "Please verify your Email first!", "error");
+		}
+	}
+	},500);
 		},200)}else{sidebar.toggleMenu();$('#signleft').click()}
 	}
 	
@@ -1395,7 +1479,6 @@ function move(num) {
 				loggedin = 1; document.cookie = "beckusrmail="+usremail+"; expires=Wed, 14 Feb 2029 12:00:00 UTC";
 				document.getElementById("namehdr").innerHTML = 'Hi ' + usrname.split(" ")[0].substring(0, 10);		 
 				document.getElementById("profile_name").innerHTML = usrname; document.getElementById("signleft").style.display = "none";
-				
 				/*
 				if(snapshot.child("idforverify").child("first").val()){
 					document.getElementById("verifbckg1").style.background = "url('"+snapshot.child("idforverify").child("first").val()+"') center/contain no-repeat";
@@ -1665,9 +1748,23 @@ function move(num) {
 		
 	}
 	
+	var reader;
 	function addnewrqst(){		
 		myNavigator.pushPage('page1.html', { animation : 'push' } );
-		setTimeout(function(){img = ""; pckgsize=""},1000);
+		setTimeout(function(){img = ""; pckgsize=""
+	document.getElementById("files").onchange = function () {
+    reader = new FileReader();
+    reader.onload = function (e) {
+	img = "url('"+e.target.result+"')"; var imgbckz = new Image();
+	imgbckz.src = String(e.target.result); document.getElementById("rotatebtn").style.display = "block";
+	document.getElementById("jstbtn").style.marginTop="0px";
+	imgbckz.onload = function(){
+	resizeImage(imgbckz)	
+	};
+	};
+    reader.readAsDataURL(this.files[0]);
+	}	
+		},1000);
 	}
 	
 	function showpickup(){
@@ -1706,22 +1803,7 @@ function move(num) {
     ctx.drawImage(img, 0, 0, wydt, 200);
     return canvas.toDataURL('image/jpeg', 0.7);
 	}
-	
-	var reader;
-	function card(){	
-	document.getElementById("files").onchange = function () {
-    reader = new FileReader();
-    reader.onload = function (e) {
-	img = "url('"+e.target.result+"')"; var imgbckz = new Image();
-	imgbckz.src = String(e.target.result);
-	imgbckz.onload = function(){
-	resizeImage(imgbckz)	
-	};
-	};
-    reader.readAsDataURL(this.files[0]);
-	}	
-	}
-	
+		
 	function lala(){
 	$(window).scrollTop($(window).scrollTop()+1);
 	setTimeout(function(){	
@@ -1853,14 +1935,6 @@ function move(num) {
 			}else{
 				mailconfirm(usremail,passwd);
 				$('body').plainOverlay('hide');
-				/*
-				firebaseRef.createUser({ email    : usremail,  password : passwd}, function(error, userData) {
-					if (error) {
-						swal("Oops...", "There was a problem creating your Account. Please try Again", "error");
-						$('body').plainOverlay('hide');
-						return;
-					} else {
-					*/	
 						unverf=1; swal("Verification Email sent!", "Please click on the link sent to your Email to complete Account Creation", "success");
 						firebaseRef.child("unverified").child(usrnewmail).child("account").update({usrimg:usrimg,usrname:usrname, usremail:usremail, usrid:usrnewmail, completed:0});	
 						//document.cookie = "beckusrmail="+usremail+"; expires=Wed, 14 Feb 2029 12:00:00 UTC";
@@ -1871,17 +1945,7 @@ function move(num) {
 				document.getElementById("profile_name").innerHTML = usrname; document.getElementById("signleft").style.display = "none";
 				document.getElementById("profile_img").src = usrimg; $('body').plainOverlay('hide');
 				$('#myanchor').click();	$("button[data-role='end']").click();				
-				//};
-				//})
 				
-				/*
-				swal({title: "Email verification Code", text: "Please enter the 4 digit Verification Code sent to your Email",   type: "input",   showCancelButton: false,   closeOnConfirm: false,   animation: "slide-from-top",   inputPlaceholder: "Verification Code" }, 
-				function(emailVal){
-				if (emailVal === false) return false;
-				if (emailVal != otpmail) {     swal.showInputError("Please Enter the correct 4 digits");     return false   }
-				
-				});
-				*/
 			}; 			
 		});
 	}

@@ -11,13 +11,12 @@
 	<script src="jquery.plainoverlay.min.js"></script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzPsPjOxzeJeld7JTP4jIbqnZ61FjKkzg&libraries=places"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">    
-		
 	<script src="https://apis.google.com/js/api:client.js"></script>  		
-	
-	<!--script type="text/javascript" src="//platform.linkedin.com/in.js">
-		api_key: 75otfwd0leuxv7
-		</script-->
-		<script>
+	<script type="text/javascript" src="//platform.linkedin.com/in.js?async=false">
+	api_key: 750re07iudckar
+	authorize: true
+	</script>
+	<script>
 		var liLogin = function() { // Setup an event listener to make an API call once auth is complete
 		if(unverf==0){
 		IN.UI.Authorize().params({"scope":["r_basicprofile", "r_emailaddress"]}).place();
@@ -61,7 +60,7 @@ var googleUser = {};
 	}
   }
   // use calcpercent for google in firebase update callback
-   var getProfileData = function() { 
+	function getProfileData() { 
 		IN.API.Profile("me").fields("id,firstName,lastName,email-address,picture-urls::(original),public-profile-url,location:(name),positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker))").result(function (me) {
             var profile = me.values[0];
             var id = profile.id;
@@ -201,7 +200,7 @@ text-decoration:none
 }
 
 .profile-name2 {
-  margin: 10px 0 0 0;
+  margin: 5px 0 0 0;
   font-weight: normal;
   font-size: 17px;
 }
@@ -278,6 +277,52 @@ text-decoration:none
 .settings-list2 {
   padding:10px 20px;
 }
+
+
+.timeline {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.timeline-li {
+  line-height: 1;
+  padding: 10px;
+  border-bottom: 1px solid #888;
+}
+
+.timeline-image {
+  width: 25px;
+  height: 50px;
+}
+
+.timeline-date {
+  float: right;
+  font-size: 12px;
+  opacity: 0.35;
+}
+
+.timeline-from {
+  margin: 10px 0 6px 0;
+}
+
+.timeline-name {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.timeline-id {
+  font-size: 14px;
+  opacity: 0.4;
+}
+
+.timeline-message {
+  margin-top: 4px;
+  font-size: 14px;
+  opacity: 0.8;
+  line-height: 1.15;
+  overflow: hidden;text-overflow:ellipsis;
+}
+
 
 	</style>
 	</head>
@@ -593,11 +638,12 @@ text-decoration:none
 </div>
         </ons-list-item>		 
 		<ons-list-item style="padding-top:10px">
-        <div id="packagephoto" style="color:#fff;position:absolute;margin-top:80px;font-size:14px;width:97%;height:20px;z-index:9;text-align:center;letter-spacing:1px;cursor: pointer" onclick="performClick('files');"><ons-icon icon="ion-camera" style="font-size:30px;color:#fff; margin-right:15px"></ons-icon>ADD PACKAGE PHOTO</div>
-		<div id="card" style="background-color:rgba(0,0,0,0.31); width: 100%; height: 200px; background-repeat: no-repeat;" onclick="card()">	 
-	 	<input id="files" type="file" name="upload" style="z-index:999;width:97%;height:200px; opacity: 0;-moz-opacity: 0;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0)"/>
-		</div>
-		<button class="button button--large" style="margin-top:10px;width:100%" onclick="showdatetym();">NEXT</button><br>
+<div id="card" style="height:200px;width:100%;background:#eee;background-size:contain; background-repeat:no-repeat; background-position:center;">
+<span id="packagephoto" style="left:50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); -moz-transform: translateX(-50%);z-index:999;color:#888;margin-top:90px;position:absolute" onclick="performClick('files')">ADD PACKAGE PHOTO</span>
+<input id="files" type="file" name="upload" name="upload1" style="background:#888;z-index:999;width:100%;height:200px; opacity: 0;-moz-opacity: 0;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);"/>
+</div>
+		<button id="rotatebtn" class="button button--large" style="display:none; background:#fff;color:#000;font-size:14px;width:100%" onclick="rotatethis();"><ons-icon icon="ion-refresh" style="margin-right:5px"></ons-icon>Rotate Image</button>
+		<button id="jstbtn" class="button button--large" style="margin-top:10px; width:100%" onclick="showdatetym();">NEXT</button>
         </ons-list-item>
         </ons-list> 
         <ons-list id="pickupdetails" style="display:none;margin-top:-1px;">
@@ -682,7 +728,7 @@ text-decoration:none
 
  <ons-template id="page3.html">
   <ons-page modifier="shop-details" style="background:#f4f4f4">	
-	<input id="pac-input" type="text" class="text-input text-input--transparent" placeholder="Search Location" style="font-size:16px;width:75%;margin-top:7px;margin-left:15px">
+	<input id="pac-input" type="text" class="text-input text-input--transparent" placeholder="Search Location" style="border-bottom:1px solid #888; font-size:16px;width:75%;margin-top:7px;margin-left:15px">
 	<button id="cancelauto" class="button button--quiet" style="margin-top:4px;color:#000;font-size:12px" onclick="myNavigator.popPage('page3.html', { animation : 'lift' } );">CLOSE</button>	
   </ons-page>
 </ons-template>
@@ -955,7 +1001,7 @@ text-decoration:none
         <ons-list-item style="border:1px solid#fff; padding-top: 10px;padding-bottom:10px;" onclick="if(loggedin==1){sidebar.toggleMenu(); setTimeout(function(){ openposts() },200)}else{sidebar.toggleMenu();$('#signleft').click()}">
          Posted Requests <span id="notif2" class="notification" style="font-size:8px;display:none">NEW</span>
         </ons-list-item>       
-		<ons-list-item style="display:none;border:1px solid#fff; padding-top: 10px;padding-bottom:10px;" onclick="openprofile()">
+		<ons-list-item style="border:1px solid#fff; padding-top: 10px;padding-bottom:10px;" onclick="openprofile()">
          My Profile
         </ons-list-item>
 		<ons-list-item style="border:1px solid#fff; padding-top: 10px;padding-bottom:10px;" onclick="if(loggedin==1){sidebar.toggleMenu(); setTimeout(function(){ editnum() },200)}else{sidebar.toggleMenu();$('#signleft').click()}">
@@ -979,120 +1025,95 @@ text-decoration:none
   </div>
   <div class="navigation-bar__right"></div>
 	</div>
-	<div class="profile-card2">
+    
+	<div class="profile-card2" id="profile_bit">
         <img id="prfimg2" src="profile.png" class="profile-image2" alt="">
-        <div class="profile-name2" id="profile_name2"></div>
-        <div class="profile-desc2"><div class="myProgress"><div class="myBar" id="myBar" style="width:10%"></div></div><br><span id="calcperc">10% completed</span></div>
+        <div class="profile-name2" id="profile_name2">&nbsp;</div>
+        <div class="profile-desc2"><div class="myProgress"><div class="myBar" id="myBar" style="width:10%"></div></div><span id="calcperc" style="display:block">10% completed</span></div>
     </div>
-    <ons-list>
-    <ons-list-item style="padding:0">
-    <ons-row>
-	<div class="navigation-bar">
-	<div class="navigation-bar__center">
+      <ons-list modifier="inset" style="background:transparent; padding-left:10px; padding-right:10px" id="basic">
+        <ons-list-item>
+		<a id="fbnotconn" href="javascript:void(0)" onclick="fbConnect()" class="btn btn-block btn-social btn-facebook" style="width:calc(100% - 50px);padding:10px;padding-left:45px;margin-top:15px;border-radius:5px;color:#fff;border:none;text-transform:none">
+		<span class="fa fa-facebook" style="padding-top:3px;margin-left:5px" ></span> Connect with Facebook</a>
+		<a id="fbconn" href="javascript:void(0)" class="btn btn-block btn-social btn-facebook" style="display:none;opacity:0.7; pointer-events:none; width:calc(100% - 50px);padding:10px;padding-left:45px;margin-top:15px;border-radius:5px;color:#fff;border:none;text-transform:none">
+		<span class="fa fa-facebook" style="padding-top:3px;margin-left:5px" ></span> Facebook Verified</a>
+        </ons-list-item>
+        <ons-list-item>
+		<a id="googlnotconn" id="customBtn" href="javascript:void(0)" class="btn btn-block btn-social btn-google" style="width:calc(100% - 50px);padding:10px;padding-left:45px;margin-top:5px;border-radius:5px;color:#fff;border:none;text-transform:none">
+		<span class="fa fa-google" style="padding-top:3px;margin-left:5px" ></span> Connect with Google</a>
+		<a id="googlconn" href="javascript:void(0)" class="btn btn-block btn-social btn-google" style="display:none;opacity:0.7; pointer-events:none; width:calc(100% - 50px);padding:10px;padding-left:45px;margin-top:5px;border-radius:5px;color:#fff;border:none;text-transform:none">
+		<span class="fa fa-google" style="padding-top:3px;margin-left:5px" ></span> Google Verified</a>
+        </ons-list-item>
+		<ons-list-item>
+		<a id="linkdnotconn" href="javascript:void(0)" onclick="liLogin()" class="btn btn-block btn-social btn-linkedin" style="width:calc(100% - 50px);padding:10px;padding-left:45px;margin-top:5px;border-radius:5px;color:#fff;border:none;text-transform:none">
+		<span class="fa fa-linkedin" style="padding-top:3px;margin-left:5px" ></span> Connect with LinkedIn</a>
+		<a id="linkdconn" href="javascript:void(0)" class="btn btn-block btn-social btn-linkedin" style="display:none;opacity:0.7; pointer-events:none; width:calc(100% - 50px);padding:10px;padding-left:45px;margin-top:5px;border-radius:5px;color:#fff;border:none;text-transform:none">
+		<span class="fa fa-linkedin" style="padding-top:3px;margin-left:5px" ></span> LinkedIn Verified</a>
+		</ons-list-item>
+		<button class="button button--large" style="background:#fff;color:#000;font-size:14px;width:100%" onclick="editnum();"><ons-icon icon="ion-edit" style="margin-right:5px"></ons-icon>Contact Number</button>
+		
+      </ons-list>
+     
+      <ons-list modifier="inset" style="border:none;margin-top: 10px;display:none" id="routes">
+        <ons-list-item style="padding-top:10px;padding-left:15px;padding-right:15px">
+            <div class="prop-desc" onclick="startrouteauto()" style="border-bottom: 1px solid #888; padding-bottom: 10px;">
+              <ons-icon icon="ion-ios-location" style="vertical-align:-10px;font-size:30px;margin-right:15px"></ons-icon>
+              <input readonly type="text" class="text-input text-input--transparent" id="startarea" placeholder="Starting Location" value="">
+            </div>
+        </ons-list-item> 
+        <ons-list-item style="padding-top:10px;padding-left:15px;padding-right:15px">
+            <div class="prop-desc" onclick="endrouteauto()">
+              <ons-icon icon="ion-ios-location" style="vertical-align:-10px;font-size:30px;margin-right:15px"></ons-icon>
+              <input readonly type="text" class="text-input text-input--transparent" id="endarea" placeholder="Ending Location" value="">
+            </div>
+		<button class="button button--large" style="margin-top:10px;padding:2px 12px;border-radius:7px" ng-click="addRoute();">ADD ROUTE</button>		
+        </ons-list-item>   
+		<ons-list class="timeline" style="margin-top:20px" modifier="inset">
+		<ons-list-header style="text-align:center;border-bottom:1px solid #cdcdcd; border-top:1px solid #cdcdcd;background:#eaeaea;padding:5px 0">Added Routes</ons-list-header>
+          <div style="overflow:auto; height:12.5em;padding-top:5px;">
+		  <ons-list-item class="timeline-li" style="padding-top:5px; padding-bottom:5px; border-bottom:1px solid #cdcdcd;" ng-repeat="route in routes">
+            <ons-row>
+              <ons-col width="50px">
+                <img src="package_route.png" class="timeline-image">
+              </ons-col>
+              <ons-col>
+			   <div class="timeline-date" ng-click="routes.$remove(route)"><ons-icon icon="ion-trash-b" style="vertical-align:-10px;font-size:30px;"></div>
+				<div class="timeline-message">{{ route.strtlocaddr }}</div>
+				<div class="timeline-message">{{ route.endlocaddr }}</div>
+              </ons-col>
+            </ons-row>
+          </ons-list-item>
+		  </div>
+        </ons-list>		
+      </ons-list>
+    <ons-list modifier="inset" style="border:none; margin-top: 10px;display:none; padding:0 5px" id="verf">        
+		<div id="verifbckg1" style="height:200px;width:100%;background:#eee;background-size:contain; background-repeat:no-repeat; background-position:center;"><span id="verfwrt" style="left:50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); -moz-transform: translateX(-50%);z-index:999;color:#888;margin-top:90px;position:absolute" onclick="performClick('verf1')">Add 1st Identity Proof</span><input type="file" id="verf1" name="upload1" style="background:#888;z-index:999;width:100%;height:200px; opacity: 0;-moz-opacity: 0;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);"/></div>
+		<div id="verifbckg2" style="height:200px;width:100%;background:#eee;margin-top:5px;background-size:contain; background-repeat:no-repeat; background-position:center;"><span id="verfwrt2" style="left:50%; transform: translateX(-50%); -webkit-transform: translateX(-50%); -moz-transform: translateX(-50%);z-index:999;color:#888;margin-top:90px;position:absolute" onclick="performClick('verf2')">Add 2nd Identity Proof</span><input type="file" id="verf2" name="upload2" style="background:#888;z-index:999;width:100%;height:200px; opacity: 0;-moz-opacity: 0;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);"/></div>	  
+	</ons-list>  
+	<ons-list>
+    <ons-list-item style="height:40px; padding:0; position : absolute; bottom : 1px;border-top:1px solid #888">
+    <ons-row style="height:40px">
+	<div class="navigation-bar" style="height:40px">
+	<div class="navigation-bar__center" style="height:40px">
     <div class="button-bar" style="width:100%;border:none;">
       <div class="button-bar__item" onclick="showbasic()">
         <input type="radio" name="navi-segment-a" checked onclick="showbasic()">
-        <div class="button-bar__button" style="height:60px;padding-top:10px">Basic</div>
+        <div class="button-bar__button" style="height:40px;padding-top:10px">Basic</div>
       </div>
       <div class="button-bar__item" onclick="showroutes()">
         <input type="radio" name="navi-segment-a" onclick="showroutes()">
-        <div class="button-bar__button" style="height:60px;padding-top:10px">Routes</div>
+        <div class="button-bar__button" style="height:40px;padding-top:10px">Routes</div>
       </div>
 	  <div class="button-bar__item" onclick="showverf()">
         <input type="radio" name="navi-segment-a" onclick="showverf()">
-        <div class="button-bar__button" style="height:60px;padding-top:10px">Verification</div>
+        <div class="button-bar__button" style="height:40px;padding-top:10px">Verification</div>
       </div>
 	</div>
 	</div>
 	</div>
-        </ons-row>
-        </ons-list-item>
-      </ons-list>
-      <ons-list modifier="inset" style="background:transparent" id="basic">
-        <ons-list-item>
-		<a ng-show="!fbconnect.length" href="javascript:void(0)" onclick="fbConnect()" class="btn btn-block btn-social btn-facebook" style="width:100%;border-radius:5px;color:#fff;border:none;text-transform:none;margin-top:5px">
-		<span class="fa fa-facebook" style="padding-top:3px;margin-left:5px" ></span> Connect with Facebook</a>
-        </ons-list-item>
-        <ons-list-item>
-		<a ng-show="!googleconnect.length" id="customBtn" href="javascript:void(0)" class="btn btn-block btn-social btn-google" style="width:100%;border-radius:5px;color:#fff;border:none;text-transform:none;margin-top:5px">
-		<span class="fa fa-google" style="padding-top:3px;margin-left:5px" ></span> Connect with Google</a>
-        </ons-list-item>
-		<ons-list-item>
-		<a ng-show="!linkedinconnect.length" href="javascript:void(0)" onclick="liLogin()" class="btn btn-block btn-social btn-linkedin" style="width:100%;border-radius:5px;color:#fff;border:none;text-transform:none;margin-top:5px">
-		<span class="fa fa-linkedin" style="padding-top:3px;margin-left:5px" ></span> Connect with LinkedIn</a>
-		</ons-list-item>
-      </ons-list>
-      </ons-list>
-      <ons-list modifier="inset" style="margin-top: 10px;display:none" id="routes">
-        <ons-list-item modifier="chevron">
-         secong
-        </ons-list-item>
-        <ons-list-item modifier="chevron">
-          dsdsas
-        </ons-list-item>
-        <ons-list-item modifier="chevron">
-          zlist
-        </ons-list-item>
-      </ons-list>
-      <ons-list modifier="inset" style="margin-top: 10px;display:none" id="verf">
-        <ons-list-item modifier="chevron">
-         third
-        </ons-list-item>
-        <ons-list-item modifier="chevron">
-          dsdsas
-        </ons-list-item>
-        <ons-list-item modifier="chevron">
-          zlist
-        </ons-list-item>
-      </ons-list>
-      <!--ons-row class="profile-wrapper2" style="padding:10px 20px">
-        <ons-col width="80px" class="profile-image-wrapper2">
-          <img src="data:image/jpeg;base64,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" class="profile-image2">
-        </ons-col>
-
-        <ons-col>
-          <div class="profile-name2">Rahul Basu</div>
-          <div class="profile-email2">50% completed</div>
-        </ons-col>
-
-      </ons-row>
-
-      <div class="settings-header2">Connect Social Accounts</div>
-      <ons-list modifier="inset" class="settings-list2" >	
-        <ons-list-item modifier="tappable" style="padding-top:10px;padding-bottom:10px">
-          Facebook
-        </ons-list-item>
-		<ons-list-item modifier="tappable" style="padding-top:10px;padding-bottom:10px">
-          Google
-        </ons-list-item>
-		<ons-list-item modifier="tappable" style="padding-top:10px;padding-bottom:10px">
-          LinkedIn
-        </ons-list-item>
-      </ons-list>
-		<br>
-	  <ons-list modifier="inset" class="settings-list2">
-        <ons-list-item modifier="chevron" style="padding-top:10px;padding-bottom:10px">
-		<ons-icon icon="ion-plus-circled" style="opacity: 0.8"></ons-icon>
-          Add Routes
-        </ons-list-item>
-
-        <ons-list-item modifier="chevron" style="padding-top:10px;padding-bottom:10px">
-		<ons-icon icon="ion-card" style="opacity: 0.8"></ons-icon>
-          Verification
-        </ons-list-item>
-      </ons-list>
-	  <br>
-      <ons-list modifier="inset" class="settings-list2" >
-        <ons-list-item modifier="tappable" style="padding-top:10px;padding-bottom:10px">
-		<ons-icon icon="ion-edit" style="opacity: 0.8"></ons-icon>
-          Contact Number
-        </ons-list-item>
-        <ons-list-item modifier="tappable" onclick="logout()" style="padding-top:10px;padding-bottom:10px">
-          <ons-icon icon="ion-log-out" style="opacity: 0.8"></ons-icon>
-          Logout
-        </ons-list-item>
-      </ons-list>
-      <br-->
+    </ons-row>
+    </ons-list-item>
+    </ons-list>	  
     </ons-page>
 	</ons-template>
 </body>

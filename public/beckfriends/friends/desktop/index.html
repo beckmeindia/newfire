@@ -14,15 +14,15 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">    
 		<script src="all.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular-sanitize.js"></script>		
-		<!--script type="text/javascript" src="//platform.linkedin.com/in.js">
-		api_key: 75otfwd0leuxv7 
+		<script type="text/javascript" src="//platform.linkedin.com/in.js?async=false">
+		api_key: 750re07iudckar 
 		authorize: true
-		</script-->
+		</script>
 		<script>		
 		var vHeight = $(window).height(), vWidth = $(window).width(), cover = $('.cover'); cover.css({"height":vHeight,"width":vWidth});
 
-		var liLogin = function() {
-		if(unverf==0){ liLogin() 
+		function liLogin() {
+		if(unverf==0){ 
 		IN.UI.Authorize().params({"scope":["r_basicprofile", "r_emailaddress"]}).place();
         IN.Event.on(IN, 'auth', getProfileData);
 		}else{ sweetAlert("Oops...", "Please verify your Email first!", "error") };
@@ -63,7 +63,7 @@ var googleUser = {};
 		}		
 	}
   
-   var getProfileData = function() { 
+    function getProfileData() { 
 		IN.API.Profile("me").fields("id,firstName,lastName,email-address,picture-urls::(original),public-profile-url,location:(name),positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker))").result(function (me) {
             var profile = me.values[0];
             var id = profile.id;
@@ -882,11 +882,11 @@ input:focus {
   .inputdemoIcons md-input-container.md-input-invalid > md-icon.email,
   .inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
     color: red; }
+	
 	#map{
-      height: 28.25em;
-	  margin:0px 10px 10px 10px;
-	  border-radius:3px
+      
 	}
+	
 	md-tabs.md-default-theme md-tabs-wrapper, md-tabs md-tabs-wrapper {
 		background:rgba(0,0,0,0.7);
 	}
@@ -986,7 +986,6 @@ input:focus {
 	callauto3();
 	callautoinit();
 	callautostart(); callautoend();
-	$('#map').plainOverlay('show',{opacity:0.8, fillColor: '#000', progress: function() { return $('<div style="font-size:40px;color:#fff;font-weight:bold">Loading...</div>') }});
 	
 	}
 	google.maps.event.addDomListener(window, 'load', initMap);	   
@@ -1078,15 +1077,7 @@ input:focus {
 	var usrnwmail = String(usremail).replace(/[^a-zA-Z0-9]/g, ' ');
 	if(usrnwmail=="undefined"){
 	swal({   title: "Email not received!",   text: "Could you please enter your Email?",   type: "input",   showCancelButton: false,   closeOnConfirm: false,   animation: "slide-from-top",   inputPlaceholder: "Your Email Address" }, function(inputValue){   if (inputValue === false) return false;      if (inputValue === ""  || !validateEmail(inputValue)) {     swal.showInputError("You need to write an email address!");     return false   }      
-	 mailconfirm(inputValue,"none"); usremail = emailVal; unverf = 1; checkfirebasefb(usremail,usrfbimg,usrname,usrfbid); 	
-	/*
-	swal({title: "Email verification Code", text: "Please enter the 4 digit Verification Code sent to your Email",   type: "input",   showCancelButton: false,   closeOnConfirm: false,   animation: "slide-from-top",   inputPlaceholder: "Verification Code" }, 
-		function(emailVal){
-			if (emailVal === false) return false;
-			if (emailVal != otpmail) {     swal.showInputError("Please Enter the correct 4 digits");     return false   }
-				usremail = emailVal; checkfirebasefb(usremail,usrfbimg,usrname,usrfbid); 				
-		});
-		*/
+	mailconfirm(inputValue,"none"); usremail = emailVal; unverf = 1; checkfirebasefb(usremail,usrfbimg,usrname,usrfbid); 	
 	});
 	}else{
 	checkfirebasefb(usremail,usrfbimg,usrname,usrfbid); 	
@@ -1124,7 +1115,7 @@ input:focus {
 	</div>	
 	<div layout="row" ng-controller="AppCtrl" ng-cloak="" style="background:transparent; padding-top:4%;height:100%; max-width:1400px; margin:0 auto;"  class="carddemoInCardActions">
   <div flex flex-xs="" flex-gt-xs="30">
-  <md-card style="max-width:30em;margin:14px 0px 0px 20px; box-shadow:0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);padding-bottom:2px">
+  <md-card style="height:34em;max-width:30em;margin:14px 0px 0px 20px; box-shadow:0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);padding-bottom:2px">
   <md-card-header style="padding:20px 40px;">
           <md-card-avatar>
 			<img src="pulse.gif">
@@ -1134,11 +1125,11 @@ input:focus {
 			<span class="md-subhead" id="pckgctr" style="color:#000">Loading...</span>                     
           </md-card-header-text>
   </md-card-header>
-  <div id="map"></div>
+  <div id="map" style="height: 28.25em; margin:0px 10px 10px 10px; border-radius:3px"></div>
   </md-card>
   </div>
   <div  flex flex-xs="" flex-gt-xs="30">
-    <md-card layout-fill layout-wrap id="rqstgist" style="max-width:25em;height:34em;margin:0px;margin-top:14px;padding-bottom:1px;box-shadow:0px 20px 10px 0px rgba(0, 0, 0, 0.15)">
+    <md-card id="rqstgist" style="max-width:25em;height:34em;margin:0px;margin-top:14px;padding-bottom:1px;box-shadow:0px 20px 10px 0px rgba(0, 0, 0, 0.15)">
 		<div style="border-top-right-radius:2px;height:12.5em;width:100%;background:#fff;background-size:contain; background-repeat:no-repeat; background-position:center;" id="tflbckg"></div>	  
         <md-card-header style="padding:10px 40px 10px 20px; border-top:1px solid #eaeaea; background-color:#ebf7fc">
           <md-card-avatar style="padding-top:0.3em">
@@ -1182,7 +1173,7 @@ input:focus {
     </md-card>  
   </div>    
     <div flex flex-xs="" flex-gt-xs="40" style="max-width:40em;background-color:transparent;padding:0 1em">
-    <md-card layout-fill layout-wrap style="height:34em;margin-top:0.85em;padding:0.3em;padding-top:0;min-width:28em;box-shadow:0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15)">
+    <md-card style="height:34em;margin-top:0.85em;padding:0.3em;padding-top:0;min-width:28em;box-shadow:0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15)">
 	   <md-card-header>         
           <md-card-header-text style="text-align:center">
 			<span class="md-subhead" style="font-size:1em">Want something delivered ?</span>
