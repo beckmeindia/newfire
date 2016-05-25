@@ -7,7 +7,8 @@
 	var usrimg = "data:image/jpeg;base64,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";
 	var arrPckgs = [], rsltshow = 0, arraccepts = [], revrsdone = 0, mycenter, lognclckd = 0, flgg=0, postctr = 0, acceptctr = 0;
 	var newflg=0; var unverf = 0; var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
-	var startlat,startlng,endlat,endlng;
+	var startlat,startlng,endlat,endlng; var accptrid,accptrname,accptrphone,accptrfbid,accptrlinkdid,accptrgooglid;
+	var notif1=0, notif2=0;
 	app.controller('AppController', ["$scope", "$firebaseArray", "$firebaseObject", function($scope, $firebaseArray, $firebaseObject) {
 		$scope.post2 = function(){
 			postctr = 1;
@@ -22,10 +23,24 @@
 			};
 		}			
 		
-		$scope.showprofile = function(value){
-			window.open('http://www.fb.com/'+value.usrfbid,'_blank');
-		}
 		
+		$scope.approvefrnd = function(){
+				$scope.hidedlg('list.html');
+				swal({   title: "Confirm BECK Friend",   text: "Are you sure you want to confirm this person to carry your package?",   type: "info",   showCancelButton: true,   closeOnConfirm: false,   showLoaderOnConfirm: true, }, function(){   		
+				var actionz = "BECK friend "+ accptrname +" was selected for order: " + idpckgmatch;
+				mailcall(actionz,accptrid,accptrphone);
+				smsmatchsuppl(accptrphone); 
+				smsmatchdmnd(usrphone,accptrname,accptrphone);
+				firebaseRef.child("users").child(usrid).child("posts").child(idpckgmatch).update({"status":"Approved & Connected"});
+				firebaseRef.child("users").child(accptrid).child("accepts").child(idpckgmatch).update({"status":"Approved"}).then(function() {
+				firebaseRef.child("users").child(usrid).child("posts").child(idpckgmatch).child("acceptors").remove();
+				geoFire.remove(idpckgmatch);	
+				myNavigator.popPage('track.html', { animation : 'none' } ); myNavigator.popPage('posted.html', { animation : 'none' } );
+				swal("Succesfully Connected", "The details of the BECK Friend you approved for this request has been sent you through SMS & Email", "success");
+				});		
+			});	
+		}
+		/*
 		$scope.approvefrnd = function(id){			
 			var number = $("input:radio[name='select']:checked").val();
 			if(number === undefined){
@@ -37,7 +52,7 @@
 				smsmatchsuppl($scope.acceptors[number].usrphone); 
 				smsmatchdmnd(usrphone,$scope.acceptors[number].usrname,$scope.acceptors[number].usrphone);
 				var otherid = $scope.acceptors[number].id;				
-				firebaseRef.child("users").child(usrid).child("posts").child(idpckgmatch).update({"status":"Approved & Completed"});
+				firebaseRef.child("users").child(usrid).child("posts").child(idpckgmatch).update({"status":"Approved & Connected"});
 				firebaseRef.child("users").child(otherid).child("accepts").child(idpckgmatch).update({"status":"Approved"}).then(function() {
 				geoFire.remove(idpckgmatch);					
 				setTimeout(function(){
@@ -49,7 +64,7 @@
 				});				
 			}
 		}
-		
+		*/
 		$scope.fillboxes = function(detail){		
 		imagz="";
 		myNavigator.pushPage('track.html', { animation : 'push' } );
@@ -76,9 +91,54 @@
 			$("#tflbckg").css("background-image", "url('" + imagz + "')");
 		});
 		},100)
-		};
+	};
+	
+	
+	
 		
-		$scope.fillboxes2 = function(detail){				
+	$scope.dialogs = {};
+	$scope.show = function(dlg,value) {
+    if (!$scope.dialogs[dlg]) {
+      ons.createDialog(dlg).then(function(dialog) {
+        $scope.dialogs[dlg] = dialog;
+        dialog.show();
+      });
+    } else {
+      $scope.dialogs[dlg].show();
+    }
+		
+	$scope.fbshow = false;$scope.googleshow = false;$scope.linkdinshow = false;
+		$scope.accptrnm = "Loading..."; $scope.accptrcomp = "Loading..."; $scope.accptrimg = "profile.png";
+		$scope.accptrlocation = " -- "; $scope.accptrcompany = " -- ";
+		accptrname = value.usrname; accptrphone = value.usrphone;
+		accptrid = value.id; $scope.cols = 10;
+		firebaseRef.child("users").child(accptrid).child("account").once("value", function(dataSnapshot) {	
+		$scope.$apply(function () {
+            $scope.accptrnm = dataSnapshot.child("usrname").val();
+			$scope.accptrcomp = dataSnapshot.child("completed").val() +"% verified";
+			$scope.cols = dataSnapshot.child("completed").val(); move2(Number(dataSnapshot.child("completed").val()));
+			if(dataSnapshot.child("facebook").val()){
+				accptrfbid = dataSnapshot.child("facebook").child("fbid").val();
+				document.getElementById("accptrfbbtn").style.display="inline-block";
+			}if(dataSnapshot.child("google").val()){
+				accptrgooglid = dataSnapshot.child("google").child("id").val();
+				document.getElementById("accptrglbtn").style.display="inline-block";
+			}if(dataSnapshot.child("linkedin").val()){
+				accptrlinkdid = dataSnapshot.child("linkedin").child("profileurl").val();
+				document.getElementById("accptrlinkdbtn").style.display="inline-block";				
+			}
+			$scope.accptrimg = dataSnapshot.child("usrimg").val();
+			$scope.accptrlocation = dataSnapshot.child("location").val();
+			if(dataSnapshot.child("company").val()) $scope.accptrcompany = getWords( String(dataSnapshot.child("company").val()));
+        });		
+		})
+	}
+	
+	$scope.hidedlg = function(dlg) {
+		$scope.dialogs[dlg].hide();
+	}
+		
+	$scope.fillboxes2 = function(detail){				
 		if(detail.acceptors === undefined){
 			$scope.acceptors = '';			
 		}
@@ -98,15 +158,14 @@
 			document.getElementById("delvdivv").style.display="block";
 		if(detail.acceptors === undefined){
 			document.getElementById("accptrdiv").style.display="none";
-			document.getElementById("appfrndbtn").style.display="none";
+			
 		}
-		else if(detail.status=="Approved & Completed"){
+		else if(detail.status=="Approved & Connected"){
 			document.getElementById("accptrdiv").style.display="none";
-			document.getElementById("appfrndbtn").style.display="none";
+			
 		}
 		else{
 			document.getElementById("accptrdiv").style.display="block";
-			document.getElementById("appfrndbtn").style.display="block";
 			idpckgmatch = detail.id;
 		};	
 		
@@ -116,6 +175,7 @@
 		document.getElementById("tflpickaddr").innerHTML = detail.pickupaddr;
 		document.getElementById("tfldelv").innerHTML = detail.deliveryarea;
 		document.getElementById("tfldelvaddr").innerHTML = detail.deliveryaddr;
+		idpckgmatch = detail.id;
 		document.getElementById("tfldtym").innerHTML = "By " + detail.deliverydate + " " + detail.deliverytime;
 		firebaseRef.child("packages").child(detail.id).child("img").once("value", function(dataSnapshot) {
 			imagz = dataSnapshot.child("img64").val();
@@ -123,7 +183,9 @@
 		});
 		},100);
 		}
-				
+	
+			
+			
 		$scope.accept2 = function(){
 		 acceptctr = 1;
 		if(loggedin==1){
@@ -159,29 +221,45 @@
 		}
 		};
 		
+	$scope.accptrfb = function(){
+		window.open('http://www.fb.com/'+accptrfbid,'_blank');
+	}
+	
+	$scope.accptrgoogl = function(){
+		window.open('https://plus.google.com/'+accptrgooglid,'_blank');
+	}
+	
+	$scope.accptrlinkdin = function(){
+		window.open(accptrlinkdid,'_blank');
+	}	
+		
 		var intervall = setInterval(function(){
 		  if(loggedin == 1){
-			clearInterval(intervall);
-			
-			$scope.accepts = $firebaseArray(firebaseRef.child("users").child(usrid).child("accepts"));
+			clearInterval(intervall);			
+			$scope.accepts = $firebaseArray(firebaseRef.child("users").child(usrid).child("accepts"));			
 			$scope.accepts.$loaded().then(function(arr){
-				for (var key in arr) {
-					if(arr[key].$id === undefined){}else{
-					arraccepts.push(arr[key].$id);
-					}
-				}
-				acceptsloaded = 1;		
-			/*
+				
 				if(arr.$getRecord("notification").$value == "no"){
 					document.getElementById("notif1").style.display="none";
 				}
 				else{
+					notif1 = 1;
 					document.getElementById("notif1").style.display="inline";
 					document.getElementById("notif").style.display="inline";
-				}
-			*/
+				}			
 			});
+			
 		$scope.posts = $firebaseArray(firebaseRef.child("users").child(usrid).child("posts"));
+		$scope.posts.$loaded().then(function(arr){				
+				if(arr.$getRecord("notification").$value == "no"){
+					document.getElementById("notif2").style.display="none";
+				}
+				else{
+					notif2 = 1;
+					document.getElementById("notif2").style.display="inline";
+					document.getElementById("notif").style.display="inline";
+				}	
+		});
 		$scope.googleconnect = $firebaseArray(firebaseRef.child("users").child(usrid).child("account").child("google"));
 		$scope.accountz = $firebaseObject(firebaseRef.child("users").child(usrid).child("account"));
 		$scope.accountdet = $firebaseArray(firebaseRef.child("users").child(usrid).child("account"));
@@ -198,7 +276,7 @@
 			var	strtlocaddr = document.getElementById("startarea").value; var endlocaddr = document.getElementById("endarea").value;
 			$scope.routes.$add({ startlat:startlat, startlng:startlng, strtlocaddr:strtlocaddr, endlat:endlat, endlng:endlng, endlocaddr:endlocaddr});
 			document.getElementById("startarea").value = ""; document.getElementById("endarea").value = "";
-			startlat=0; startlng=0; strtlocaddr="";endlat=0; endlng=0; endlocaddr=""; calcpercent();
+			startlat=0; startlng=0; strtlocaddr="";endlat=0; endlng=0; endlocaddr="";
 			}		
 		}else{
 		sweetAlert("Oops...", "Please verify your Email first!", "error");
@@ -208,7 +286,17 @@
 		},2000);	
 		}
 	]);
-	
+
+app.filter('reverse', function() {
+  return function(items) {
+    return items.slice().reverse();
+  };
+});
+
+function getWords(str) {
+    return str.split(/\s+/).slice(0,2).join(" ");
+	}
+
 	function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
     var vars = query.split('&');
@@ -356,8 +444,7 @@ jQuery.fn.putCursorAtEnd = function() {
     };
 
 	}
-	
-	
+		
 	function callback(base64data) {	img64 = base64data;
 	 document.getElementById("card").style.backgroundImage = "url('"+img64+"')";
 		document.getElementById("card").style.backgroundSize = "contain"; document.getElementById("card").style.backgroundPosition = "center"; document.getElementById("card").style.backgroundRepeat = "no-repeat"; }
@@ -365,12 +452,15 @@ jQuery.fn.putCursorAtEnd = function() {
 	function openposts(){
 		myNavigator.pushPage('posted.html', { animation : 'push' } );
 		firebaseRef.child("users").child(usrid).child("posts").update({notification:"no"});
+		document.getElementById("notif2").style.display="none"; notif2=0;
+		if(notif1==0 && notif2==0) document.getElementById("notif").style.display="none";
 	}
-	
-	
+		
 	function openaccepts(){
 		myNavigator.pushPage('schedule.html', { animation : 'push' } );
 		firebaseRef.child("users").child(usrid).child("accepts").update({notification:"no"});
+		document.getElementById("notif1").style.display="none"; notif1 = 0;
+		if(notif1==0 && notif2==0) document.getElementById("notif").style.display="none";
 	}
 	
 	
@@ -383,7 +473,7 @@ jQuery.fn.putCursorAtEnd = function() {
    }
 }
 	function exit(){
-		swal({   title: "Are you sure?",   text: "You will lose the data you added for this request",   type: "warning",   showCancelButton: true,   confirmButtonColor: "#880000",   confirmButtonText: "Yes, go back",   closeOnConfirm: true }, function(){   myNavigator.popPage('page1.html', { animation : 'lift' } ); google.maps.event.trigger(map, 'resize'); });
+		swal({   title: "Are you sure?",   text: "You will lose the data you added for this request",   type: "warning",   showCancelButton: true,   confirmButtonColor: "#8989ff",   confirmButtonText: "Yes, go back",   closeOnConfirm: true }, function(){   myNavigator.popPage('page1.html', { animation : 'lift' } ); google.maps.event.trigger(map, 'resize'); });
 	}
 	
 	  function smsmatchdmnd(number,name1,num1){
@@ -393,7 +483,7 @@ jQuery.fn.putCursorAtEnd = function() {
       data:
       {
         phoneNumber : number,
-        randomNumber : 'Your request has been accepted by your BECK friend '+String(name1).split(" ")[0].substring(0, 30)+'. You can reach him at '+num1
+        randomNumber : 'Your request has been accepted by your BECK friend '+String(name1).split(" ")[0].substring(0, 30)+' whom you can reach at '+num1
       },
       error: function(error) {
       //console.log(JSON.stringify(error));
@@ -429,7 +519,7 @@ jQuery.fn.putCursorAtEnd = function() {
       data:
       {
         phoneNumber : number,
-        randomNumber : 'Thanks for accepting the request of your BECK friend '+String(usrname).split(" ")[0].substring(0, 30)+'. You can reach him at '+usrphone
+        randomNumber : 'Thanks for accepting the request of your BECK friend '+String(usrname).split(" ")[0].substring(0, 30)+' whom you can reach at '+usrphone
       },
       error: function(error) {
       //console.log(JSON.stringify(error));
@@ -633,6 +723,21 @@ geoQuery.on("key_exited", function(vehicleId, vehicleLocation) {
 	
 function move(num) {
   var elem = document.getElementById("myBar");   
+  var width = 1;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width >= num) {
+      clearInterval(id);
+    } else {
+	  width++;
+      elem.style.width = width + '%'; 
+    }
+  }
+}
+
+
+function move2(num) {
+  var elem = document.getElementById("myBar2");   
   var width = 1;
   var id = setInterval(frame, 10);
   function frame() {
@@ -962,6 +1067,7 @@ function move(num) {
 	});	
 	
 	function showbasic(){
+		calcpercent();
 		document.getElementById("basic").style.display="block";
 		document.getElementById("profile_bit").style.display="block";
 		document.getElementById("routes").style.display="none";
@@ -1276,10 +1382,11 @@ function move(num) {
 				document.getElementById("delvareasumm").innerHTML = deliveryarea;
 				document.getElementById("delvdetsumm").innerHTML = deliveryaddr;			
 				document.getElementById("datetymsumm").innerHTML =  deliverytime+" on "+deliverydate;
+				fare2 = newfrconv;				
 			},3500)			
 		}		
 	}
-	
+	var fare2="";
 	function resizeImage(img) {
     img64 = imageToDataUri(img);		
 	document.getElementById("packagephoto").style.display = "none";
@@ -1366,7 +1473,7 @@ function move(num) {
 	}
 	
 	function reformatDate(dateStr){
-		deliverydate = moment(dateStr).format('MM-DD-YYYY');
+		deliverydate = new Date(dateStr).getTime();
 		return moment(deliverydate).format('ll');
 	}
 		
@@ -1390,7 +1497,11 @@ function move(num) {
 	}
 	
 	function openprofile(){
-		if(loggedin==1){sidebar.toggleMenu();setTimeout(function(){ myNavigator.pushPage('profile.html', { animation : 'push' } ); 
+		if(loggedin==1){ sidebar.toggleMenu(); openprofileryt() }else{ sidebar.toggleMenu(); $('#signleft').click() }
+	}
+	
+	function openprofileryt(){
+		setTimeout(function(){ myNavigator.pushPage('profile.html', { animation : 'push' } ); 
 		setTimeout(function(){ 
 		startApp(); calcpercent(); document.getElementById("profile_name2").innerHTML = usrname;  document.getElementById("prfimg2").src = usrimg; 
 		
@@ -1426,7 +1537,7 @@ function move(num) {
 		}
 	}
 	},500);
-		},200)}else{sidebar.toggleMenu();$('#signleft').click()}
+		},200)
 	}
 	
 	function smsending(){
@@ -1477,18 +1588,9 @@ function move(num) {
 				usrid = snapshot.child("usrid").val();
 				usrimg = snapshot.child("usrimg").val(); document.getElementById("profile_img").src = usrimg;
 				loggedin = 1; document.cookie = "beckusrmail="+usremail+"; expires=Wed, 14 Feb 2029 12:00:00 UTC";
-				document.getElementById("namehdr").innerHTML = 'Hi ' + usrname.split(" ")[0].substring(0, 10);		 
+				document.getElementById("namehdr").innerHTML = 'Hi ' + usrname.split(" ")[0].substring(0, 10); document.getElementById("mnulogin").style.display = "none";	document.getElementById("mnuloggedin").style.display = "block";	 
 				document.getElementById("profile_name").innerHTML = usrname; document.getElementById("signleft").style.display = "none";
-				/*
-				if(snapshot.child("idforverify").child("first").val()){
-					document.getElementById("verifbckg1").style.background = "url('"+snapshot.child("idforverify").child("first").val()+"') center/contain no-repeat";
-					document.getElementById("verfwrt").style.display = "none";
-				}
-				if(snapshot.child("idforverify").child("second").val()){
-					document.getElementById("verifbckg2").style.background = "url('"+snapshot.child("idforverify").child("second").val()+"') center/contain no-repeat";
-					document.getElementById("verfwrt2").style.display = "none";
-				}
-				*/
+				
 			}		
 		});
 	}
@@ -1507,7 +1609,7 @@ function move(num) {
 				usremail=  snapshot.child("usremail").val();
 				usrphone = snapshot.child("usrphone").val();
 				usrid = snapshot.child("usrid").val();
-				usrimg = snapshot.child("usrimg").val();
+				usrimg = snapshot.child("usrimg").val(); document.getElementById("mnulogin").style.display = "none";	document.getElementById("mnuloggedin").style.display = "block";	
 				loggedin = 1; document.cookie = "beckusrmail="+usremail+"; expires=Wed, 14 Feb 2029 12:00:00 UTC"; $('#myanchor').click();
 				if(postctr==1){ $("#posting").click(); postctr=0; }else if(acceptctr==1){ $("#accepting").click(); acceptctr=0};
 				document.getElementById("profile_img").src = usrimg; document.getElementById("namehdr").innerHTML = 'Hi ' + usrname.split(" ")[0].substring(0, 10);		 
@@ -1621,7 +1723,7 @@ function move(num) {
       data:
       {
         phoneNumber : number,
-        randomNumber : 'Your request has been accepted by your BECK friend '+String(usrname).split(" ")[0].substring(0, 30)+'. You can approve his request from your profile at www.beckfriends.com'
+        randomNumber : 'Your request has been accepted by your BECK friend '+String(usrname).split(" ")[0].substring(0, 30)+'. You can approve this request from your profile'
       },
       error: function(error) {
       //console.log(JSON.stringify(error));
@@ -1657,7 +1759,7 @@ function move(num) {
       data:
       {
         phoneNumber : number,
-        randomNumber : 'Thanks for accepting the request of your BECK friend '+String(arrPckgs[rsltshow].usrname).split(" ")[0].substring(0, 10)+'. We will notify you once it has been approved. You can check the status from your profile.'
+        randomNumber : 'Thanks for accepting the request of your BECK friend '+String(arrPckgs[rsltshow].usrname).split(" ")[0].substring(0, 10)+'. We will notify you once it has been approved. You can check the status from your profile'
       },
       error: function(error) {
       //console.log(JSON.stringify(error));
@@ -1705,8 +1807,7 @@ function move(num) {
 		});
 		var orderid2 = orderid+"D";
 		firebaseRef.child("packages").child(orderid).update({img:{img64:img64}}).then(function() {
-		firebaseRef.child("users").child(usrid).child("posts").child(orderid).update({status:"Waiting for Accept",img64:img64,description:description,id:orderid,lat:pickuplat,lon:pickuplng,usrid:usrid,usrphone:usrphone,usrname:usrname,usremail:usremail,pickuplat:pickuplat,pickuplng:pickuplng, delvlat:delvlat, delvlng:delvlng, pickuparea:pickuparea, pickupaddr:pickupaddr, pickupname:pickupname, pickupnum:pickupnum, deliveryaddr:deliveryaddr, deliveryarea:deliveryarea, deliverynum:deliverynum, deliveryname:deliveryname,deliverydate:deliverydate,deliverytime:deliverytime, pckgvalue:pckgvalue, pckgweight:pckgweight,pckgsize:pckgsize,fare:fare});
-		firebaseRef.child("users").child(usrid).child("posts").update({notification:"yes"});
+		firebaseRef.child("users").child(usrid).child("posts").child(orderid).update({status:"Waiting for Accept",img64:img64,description:description,id:orderid,lat:pickuplat,lon:pickuplng,usrid:usrid,usrphone:usrphone,usrname:usrname,usremail:usremail,pickuplat:pickuplat,pickuplng:pickuplng, delvlat:delvlat, delvlng:delvlng, pickuparea:pickuparea, pickupaddr:pickupaddr, pickupname:pickupname, pickupnum:pickupnum, deliveryaddr:deliveryaddr, deliveryarea:deliveryarea, deliverynum:deliverynum, deliveryname:deliveryname,deliverydate:deliverydate,deliverytime:deliverytime, pckgvalue:pckgvalue, pckgweight:pckgweight,pckgsize:pckgsize,fare:fare2});
 		geoFire.set(orderid, [pickuplat, pickuplng]).then(function() {}, function(error) {
 		myNavigator.popPage('request.html', { animation : 'none' } );
 		swal({   title: "POST FAILED",   text: "Oops! Failed to post. Please try again",   type: "error",   confirmButtonText: "OK" });
@@ -1717,7 +1818,6 @@ function move(num) {
 		setTimeout(function(){
 		google.maps.event.trigger(map, 'resize');
 		swal("Succesfully Posted", "Your Request is posted at the pickup location. We shall update you soon!", "success");
-		rfrshresults(map.getCenter());
 		},1000)
 		}, function(error) {
 		myNavigator.popPage('request.html', { animation : 'none' } );
@@ -1742,8 +1842,7 @@ function move(num) {
 		document.getElementById("timebtn").style.background="#00b100";		
 		document.getElementById("pickupbtn").style.background="#252525";
 		document.getElementById("deliverybtn").style.background="#252525";
-		document.getElementById('myDate').valueAsDate = new Date();
-		document.getElementById("myDate").min = document.getElementById("myDate").value;
+		document.getElementById('myDate').valueAsDate = new Date(); document.getElementById("myDate").min = document.getElementById("myDate").value;
 		}
 		
 	}
@@ -1880,14 +1979,7 @@ function move(num) {
 				usrphone = snapshot.child("usrphone").val();
 				usrimg = snapshot.child("usrimg").val();
 				usrid = snapshot.child("usrid").val();	
-				if(snapshot.child("idforverify").child("first").val()){
-					document.getElementById("verifbckg1").style.background = "url('"+snapshot.child("idforverify").child("first").val()+"') center/contain no-repeat";
-					document.getElementById("verfwrt").style.display = "none";
-				}
-				if(snapshot.child("idforverify").child("second").val()){
-					document.getElementById("verifbckg2").style.background = "url('"+snapshot.child("idforverify").child("second").val()+"') center/contain no-repeat";
-					document.getElementById("verfwrt2").style.display = "none";
-				}				
+				document.getElementById("mnulogin").style.display = "none";	document.getElementById("mnuloggedin").style.display = "block";	
 				loggedin = 1; document.cookie = "beckusrmail="+usremail+"; expires=Wed, 14 Feb 2029 12:00:00 UTC";
 				$('#myanchor').click(); $('body').plainOverlay('hide');	if(postctr==1){ $("#posting").click(); postctr=0; }else if(acceptctr==1){ $("#accepting").click(); acceptctr=0};
 				document.getElementById("namehdr").innerHTML = 'Hi ' + usrname.split(" ")[0].substring(0, 10);		 
@@ -1941,7 +2033,7 @@ function move(num) {
 						usrid = usrnewmail; var regsclbck = "New user registered on friends : "+usrname+" "+usremail;
 						loggedin = 1; 
 				if(postctr==1){ $("#posting").click(); postctr=0; }else if(acceptctr==1){ $("#accepting").click(); acceptctr=0};
-				document.getElementById("namehdr").innerHTML = 'Hi ' + usrname.split(" ")[0].substring(0, 10);		 
+				document.getElementById("namehdr").innerHTML = 'Hi ' + usrname.split(" ")[0].substring(0, 10);	document.getElementById("mnulogin").style.display = "none";	document.getElementById("mnuloggedin").style.display = "block";		 
 				document.getElementById("profile_name").innerHTML = usrname; document.getElementById("signleft").style.display = "none";
 				document.getElementById("profile_img").src = usrimg; $('body').plainOverlay('hide');
 				$('#myanchor').click();	$("button[data-role='end']").click();				
