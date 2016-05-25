@@ -94,7 +94,7 @@ function($scope, $firebaseArray, $firebaseObject, $mdDialog, $mdMedia) {
 		firebaseRef.child("users").child(usrid).child("accepts").update({notification:"yes"});		
 		smsacceptdm(arrPckgs[rsltshow].usrphn);smsacceptsupp(usrphone); var actionz = "BECK friend "+ usrname +" accepted a new order: " + arrPckgs[rsltshow].id; mailcall(actionz,usremail,usrphone);	
 		$('body').plainOverlay('hide');
-		swal("Succesfully Accepted", "The details of the request you accepted has been sent to you through SMS", "success");
+		swal("Succesfully Accepted", "You have successfully accepted the request", "success");
   		arraccepts.push(arrPckgs[rsltshow].id);
 		rfrshresults(mycenter);		
 		})			
@@ -182,14 +182,14 @@ function($scope, $firebaseArray, $firebaseObject, $mdDialog, $mdMedia) {
 				$scope.hide();
 				swal({   title: "Confirm BECK Friend",   text: "Are you sure you want to confirm this person to carry your package?",   type: "info",   showCancelButton: true,   closeOnConfirm: false,   showLoaderOnConfirm: true, }, function(){   		
 				var actionz = "BECK friend "+ accptrname +" was selected for order: " + idpckgmatch;
-				mailcall(actionz,accptrid,accptrphone); mailcallmatch2(usremail,usrname,usrphone,pname,paddr,pno,dname,daddr,dno);
+				mailcall(actionz,accptrid,accptrphone); mailcallmatch2(acceptemail,accptrname,pname,paddr,pno,dname,daddr,dno);
 				smsmatchsuppl(accptrphone); mailcallmatch(usrname,usremail,accptrname,acceptemail,accptrphone);
 				smsmatchdmnd(usrphone,accptrname,accptrphone);
 				firebaseRef.child("users").child(usrid).child("posts").child(idpckgmatch).update({"status":"Approved & Connected"});
 				firebaseRef.child("users").child(accptrid).child("accepts").child(idpckgmatch).update({"status":"Approved"}).then(function() {
 				firebaseRef.child("users").child(usrid).child("posts").child(idpckgmatch).child("acceptors").remove();
 				geoFire.remove(idpckgmatch);				
-				swal("Succesfully Connected", "The details of the BECK Friend you approved for this request has been sent you through SMS & Email", "success");
+				swal("Succesfully Connected", "The details of the BECK Friend you approved for this request has been sent to you through SMS & Email", "success");
 				});		
 			});	
 		}
@@ -333,15 +333,15 @@ function move(num) {
 	});
 	}
 	
-	function mailcallmatch2(useremail,username,userphone,pname,paddr,pno,dname,daddr,dno){
+	function mailcallmatch2(useremail,username,pname,paddr,pno,dname,daddr,dno){
+		console.log("email= "+useremail);
 	$.ajax({
-      url: 'https://www.beckme.in/details2.php',
+      url: 'https://www.beckme.in/details.php',
       data:
       {
-		useremail:useremail,
-		username:username,
-		userphone:userphone,
-        pname : pname,
+		acceptemail:useremail,
+		acceptname:username,
+		pname : pname,
 		paddr : paddr,
 		pno : pno,
 		dname : dname,
@@ -360,11 +360,11 @@ function move(num) {
 	
 	function mailcallmatch(username,useremail,acceptname,acceptemail,acceptphone){
 	$.ajax({
-      url: 'https://www.beckme.in/details.php',
+      url: 'https://www.beckme.in/details2.php',
       data:
       {
-		useremail:useremail,
-		username:username,
+		usremail:useremail,
+		usrname:username,
         acceptemail:acceptemail,
 		acceptname:acceptname,
 		acceptno:acceptphone
@@ -475,6 +475,7 @@ function move2(num) {
             var address = (results[0].formatted_address);
 			if(ntfnd==1) ntfnd=0;
 			if(revrsdone == 1){}else{
+			/*
 			var country = findResult(results[0].address_components, "country");
 			if(country == 'IN'){
 				conval = 1; convcurr = "INR";
@@ -487,7 +488,7 @@ function move2(num) {
 			}else{
 				conval = 60; convcurr = "USD";
 			}
-			
+			*/
 			revrsdone = 1;
 			}
         }

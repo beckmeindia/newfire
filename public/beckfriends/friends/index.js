@@ -8,7 +8,8 @@
 	var arrPckgs = [], rsltshow = 0, arraccepts = [], revrsdone = 0, mycenter, lognclckd = 0, flgg=0, postctr = 0, acceptctr = 0;
 	var newflg=0; var unverf = 0; var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
 	var startlat,startlng,endlat,endlng; var accptrid,accptrname,accptrphone,accptrfbid,accptrlinkdid,accptrgooglid;
-	var notif1=0, notif2=0;
+	var notif1=0, notif2=0; var accptrid,accptrname,accptrphone,accptrfbid,accptrlinkdid,accptrgooglid,pname,paddr,pno,dname,daddr,dno;
+	
 	app.controller('AppController', ["$scope", "$firebaseArray", "$firebaseObject", function($scope, $firebaseArray, $firebaseObject) {
 		$scope.post2 = function(){
 			postctr = 1;
@@ -28,15 +29,15 @@
 				$scope.hidedlg('list.html');
 				swal({   title: "Confirm BECK Friend",   text: "Are you sure you want to confirm this person to carry your package?",   type: "info",   showCancelButton: true,   closeOnConfirm: false,   showLoaderOnConfirm: true, }, function(){   		
 				var actionz = "BECK friend "+ accptrname +" was selected for order: " + idpckgmatch;
-				mailcall(actionz,accptrid,accptrphone);
-				smsmatchsuppl(accptrphone); 
+				mailcall(actionz,accptrid,accptrphone); mailcallmatch2(acceptemail,accptrname,pname,paddr,pno,dname,daddr,dno);
+				smsmatchsuppl(accptrphone); mailcallmatch(usrname,usremail,accptrname,acceptemail,accptrphone);
 				smsmatchdmnd(usrphone,accptrname,accptrphone);
 				firebaseRef.child("users").child(usrid).child("posts").child(idpckgmatch).update({"status":"Approved & Connected"});
 				firebaseRef.child("users").child(accptrid).child("accepts").child(idpckgmatch).update({"status":"Approved"}).then(function() {
 				firebaseRef.child("users").child(usrid).child("posts").child(idpckgmatch).child("acceptors").remove();
 				geoFire.remove(idpckgmatch);	
 				myNavigator.popPage('track.html', { animation : 'none' } ); myNavigator.popPage('posted.html', { animation : 'none' } );
-				swal("Succesfully Connected", "The details of the BECK Friend you approved for this request has been sent you through SMS & Email", "success");
+				swal("Succesfully Connected", "The details of the BECK Friend you approved for this request has been sent to you through SMS & Email", "success");
 				});		
 			});	
 		}
@@ -128,7 +129,7 @@
 				document.getElementById("accptrlinkdbtn").style.display="inline-block";				
 			}
 			$scope.accptrimg = dataSnapshot.child("usrimg").val();
-			$scope.accptrlocation = dataSnapshot.child("location").val();
+			$scope.accptrlocation = dataSnapshot.child("location").val(); acceptemail = dataSnapshot.child("usremail").val();
 			if(dataSnapshot.child("company").val()) $scope.accptrcompany = getWords( String(dataSnapshot.child("company").val()));
         });		
 		})
@@ -156,6 +157,7 @@
 			document.getElementById("tfldnmct").innerHTML = detail.deliveryname + "<br>" + detail.deliverynum;
 			document.getElementById("pickupdivv").style.display="block";
 			document.getElementById("delvdivv").style.display="block";
+			
 		if(detail.acceptors === undefined){
 			document.getElementById("accptrdiv").style.display="none";
 			
@@ -175,7 +177,7 @@
 		document.getElementById("tflpickaddr").innerHTML = detail.pickupaddr;
 		document.getElementById("tfldelv").innerHTML = detail.deliveryarea;
 		document.getElementById("tfldelvaddr").innerHTML = detail.deliveryaddr;
-		idpckgmatch = detail.id;
+		idpckgmatch = detail.id; pname = detail.pickupname; paddr = detail.pickuparea+" , "+detail.pickupaddr; pno = detail.pickupnum; dname = detail.deliveryname; daddr = detail.deliveryarea+" , "+detail.deliveryaddr; dno = detail.deliverynum;
 		document.getElementById("tfldtym").innerHTML = "By " + detail.deliverydate + " " + detail.deliverytime;
 		firebaseRef.child("packages").child(detail.id).child("img").once("value", function(dataSnapshot) {
 			imagz = dataSnapshot.child("img64").val();
@@ -209,7 +211,7 @@
 		smsacceptdm(arrPckgs[rsltshow].usrphn);smsacceptsupp(usrphone); var actionz = "BECK friend "+ usrname +" accepted a new order: " + arrPckgs[rsltshow].id; mailcall(actionz,usremail,usrphone);	
 		myNavigator.popPage('accept.html', { animation : 'none' } );
 		myNavigator.popPage('page4.html', { animation : 'none' } );
-		google.maps.event.trigger(map, 'resize'); swal("Succesfully Accepted", "The details of the request you accepted has been sent you through SMS", "success");
+		google.maps.event.trigger(map, 'resize'); swal("Succesfully Accepted", "You have successfully accepted the request", "success");
   		arraccepts.push(arrPckgs[rsltshow].id);
 		rfrshresults(map.getCenter());
 		})			
@@ -567,6 +569,53 @@ jQuery.fn.putCursorAtEnd = function() {
 	});
 	}
 	
+	
+	function mailcallmatch2(useremail,username,pname,paddr,pno,dname,daddr,dno){
+	$.ajax({
+      url: 'https://www.beckme.in/details.php',
+      data:
+      {
+		acceptemail:useremail,
+		acceptname:username,
+		pname : pname,
+		paddr : paddr,
+		pno : pno,
+		dname : dname,
+		daddr : daddr,
+		dno : dno,
+      },
+      error: function(error) {
+		//console.log(error)
+        },
+      success: function(data) {
+		//  console.log(data)
+       },
+      type: 'POST'
+	});
+	}
+	
+	function mailcallmatch(username,useremail,acceptname,acceptemail,acceptphone){
+	$.ajax({
+      url: 'https://www.beckme.in/details2.php',
+      data:
+      {
+		usremail:useremail,
+		usrname:username,
+        acceptemail:acceptemail,
+		acceptname:acceptname,
+		acceptno:acceptphone
+      },
+      error: function(error) {
+		//console.log(error)
+        },
+      success: function(data) {
+		//  console.log(data)
+       },
+      type: 'POST'
+	});
+	}
+	
+	
 	function mailcall(custName,custEmail,custPhone){
 	$.ajax({
       url: 'https://www.beckme.in/request.php',
@@ -857,6 +906,7 @@ function move2(num) {
 			document.getElementById("locasion").innerHTML = address;				
 			}
 			var country = findResult(results[0].address_components, "country");
+			/*
 			if(country == 'IN'){
 				conval = 1; convcurr = "INR";
 			}else if(country == "IT" || country == "GR" || country == "FR" || country == "ES" || country == "PL" || country == "BE" || country == "DE" ||country == "IE" || country == "PT" || country == "CH" || country == "TR" || country == "UA" || country == "DK" || country == "NL"){
@@ -868,6 +918,7 @@ function move2(num) {
 			}else{
 				conval = 60; convcurr = "USD";
 			}
+			*/
 			revrsdone = 1;
         }
     });
