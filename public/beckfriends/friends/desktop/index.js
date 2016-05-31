@@ -8,7 +8,7 @@
 	var arrPckgs = [], rsltshow = 0, arraccepts = [], revrsdone = 0, mycenter, lognclckd = 0, flgg=0, postctr = 0, acceptctr = 0; var unverf = 0;
 	var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
 	var notif1=0, notif2=0; var accptrid,accptrname,accptrphone,accptrfbid,accptrlinkdid,accptrgooglid,pname,paddr,pno,dname,daddr,dno;
-	
+	var showthetour = 0;
 angular.module('MyApp',['ngMaterial','firebase','ngMessages','ngSanitize']) 
  .controller('PositionDemoCtrl', function DemoCtrl($mdDialog) {
     var originatorEv;
@@ -31,7 +31,6 @@ angular.module('MyApp',['ngMaterial','firebase','ngMessages','ngSanitize'])
 function($scope, $firebaseArray, $firebaseObject, $mdDialog, $mdMedia) {
 	$scope.status = '  ';
 	$scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
-
 	$scope.data = {};
 	$scope.data.cb4 = false;
 	$scope.descriptor="";
@@ -47,7 +46,11 @@ function($scope, $firebaseArray, $firebaseObject, $mdDialog, $mdMedia) {
       (new Date()).getFullYear(),
       (new Date()).getMonth() + 2,
       (new Date()).getDate());	
-       
+    
+    $scope.removeroute= function(route,routes){
+        routes.$remove(route); setTimeout(function(){ calcpercent() },1000);
+    }
+      
 	$scope.post2 = function(){
 		postctr = 1;
 		if(loggedin==1){
@@ -86,11 +89,17 @@ function($scope, $firebaseArray, $firebaseObject, $mdDialog, $mdMedia) {
 			fillColor: '#000',
 			progress: function() { return $('<div style="font-size:40px;color:#fff;font-weight:bold">Accepting...</div>'); }
 			});
+		firebaseRef.child("users").child(usrid).child("accepts").child(arrPckgs[rsltshow].id).once("value", function(snapshot){	
+		if(snapshot.val()){
+			$('body').plainOverlay('hide');
+			swal("Oops", "You can't accept the same request twice", "error");  			
+		}else{			
 		clearInterval(interval);
 		firebaseRef.child("users").child(usrid).child("accepts").child(arrPckgs[rsltshow].id).update(arrPckgs[rsltshow]);
 		firebaseRef.child("users").child(arrPckgs[rsltshow].usrid).child("posts").child(arrPckgs[rsltshow].id).update({status:"Waiting for Approval"});
 		firebaseRef.child("users").child(arrPckgs[rsltshow].usrid).child("posts").update({notification:"yes"});
 		firebaseRef.child("users").child(arrPckgs[rsltshow].usrid).child("posts").child(arrPckgs[rsltshow].id).child("acceptors").child(usrid).update({id:usrid,usrname:usrname,usrphone:usrphone, usrimg:usrimg}).then(function() {
+		firebaseRef.child("users").child(arrPckgs[rsltshow].usrid).child("posts").child(arrPckgs[rsltshow].id).child("acceptors2").child(usrid).update({id:usrid,usrname:usrname,usrphone:usrphone, usrimg:usrimg}).then(function() {
 		firebaseRef.child("users").child(usrid).child("accepts").update({notification:"yes"});		
 		smsacceptdm(arrPckgs[rsltshow].usrphn);smsacceptsupp(usrphone); var actionz = "BECK friend "+ usrname +" accepted a new order: " + arrPckgs[rsltshow].id; mailcall(actionz,usremail,usrphone);	
 		$('body').plainOverlay('hide');
@@ -98,7 +107,10 @@ function($scope, $firebaseArray, $firebaseObject, $mdDialog, $mdMedia) {
   		arraccepts.push(arrPckgs[rsltshow].id);
 		rfrshresults(mycenter);		
 		})			
-		};		
+		});
+		}
+		})
+		}		
 		},2000);		
 		}
 		}else{
@@ -199,7 +211,7 @@ function($scope, $firebaseArray, $firebaseObject, $mdDialog, $mdMedia) {
 			clearInterval(intervall);				
 			$scope.accepts = $firebaseArray(firebaseRef.child("users").child(usrid).child("accepts"));
 			$scope.accepts.$loaded().then(function(arr){
-				
+				if(arr.$getRecord("notification")){
 				if(arr.$getRecord("notification").$value == "no"){
 					document.getElementById("notif1").style.display="none";
 				}
@@ -207,10 +219,12 @@ function($scope, $firebaseArray, $firebaseObject, $mdDialog, $mdMedia) {
 					notif1 = 1;
 					document.getElementById("notif1").style.display="inline";
 					document.getElementById("notif").style.display="inline";
-				}			
+				}
+				}				
 			});
 		$scope.posts = $firebaseArray(firebaseRef.child("users").child(usrid).child("posts"));
-		$scope.posts.$loaded().then(function(arr){				
+		$scope.posts.$loaded().then(function(arr){
+				if(arr.$getRecord("notification")){
 				if(arr.$getRecord("notification").$value == "no"){
 					document.getElementById("notif2").style.display="none";
 				}
@@ -219,7 +233,7 @@ function($scope, $firebaseArray, $firebaseObject, $mdDialog, $mdMedia) {
 					document.getElementById("notif2").style.display="inline";
 					document.getElementById("notif").style.display="inline";
 				}
-
+		}
 		});
 		$scope.googleconnect = $firebaseArray(firebaseRef.child("users").child(usrid).child("account").child("google"));
 		$scope.accountz = $firebaseObject(firebaseRef.child("users").child(usrid).child("account"));
@@ -609,6 +623,10 @@ var nofkeys=0;
 		setTimeout(function(){swal({   title: "No Live Requests",   text: "Presently there are no live requests around this location. You can add a request here if you want or search live requests for another location",   timer: 8000 })},3000);		
 		}	
     	}else{
+			console.log(showthetour);
+			if(showthetour==1){
+				tourist.start(); showthetour = 0;				
+			}
 			document.getElementById("prevbtn").style.display="none"; showreslt(0);
 			drawroute(arrPckgs[0].pickuplat, arrPckgs[0].pickuplng, arrPckgs[0].delvlat, arrPckgs[0].delvlng);	
 		}
@@ -664,15 +682,53 @@ _.isString = function (obj) {
   return toString.call(obj) == '[object String]';
 }
 
-var underverf = 0;
+var tourist;
+var underverf = 0; var scrollHandle = 0, scrollStep = 7, parent = $("#acceptcontainer");
 $(document).ready(function(){
+var stepz = [{
+  content: '<p>First look at this thing</p>',
+  highlightTarget: true,
+  nextButton: true,
+  target: $('#livereq'),
+  my: 'bottom center',
+  at: 'top center'
+}, {
+  content: '<p>And then at this thing</p>',
+  highlightTarget: true,
+  nextButton: true,
+  target: $('#rqstgist'), 
+  my: 'bottom center',
+  at: 'top center'
+}, {
+  content: '<p>And then at this thing</p>',
+  highlightTarget: true,
+  nextButton: true,
+  target: $('#addreq'),
+  my: 'bottom center',
+  at: 'top center'
+}
+, {
+  content: '<p>And then at this thing</p>',
+  highlightTarget: true,
+  nextButton: true,
+  target: $('#lastbit'),
+  my: 'bottom center',
+  at: 'top center'
+}]
+
+tourist = new Tourist.Tour({
+  steps: stepz,
+  tipClass: 'Bootstrap',
+  tipOptions:{ showEffect: 'slidein' }
+});		
 	var value = readCookie('beckusrmail');
 	if(value){		
 		checkfirebase(value);
 	}else{
+		showthetour=1;
 		var linkref = String(getQueryVariable('id'));
 		if(linkref == 'undefined'){
-			document.getElementById("signleft").style.display = "inline-block";
+			document.getElementById("signleft").style.display = "inline-block";			
 		}else{
 			var decodedString =  String(Base64.decode(linkref));
 			document.cookie = "beckusrmail="+decodedString+"; expires=Wed, 14 Feb 2029 12:00:00 UTC";
@@ -862,67 +918,19 @@ $(document).ready(function(){
 			document.getElementById("mnuitm2").style.display="block";	
 			document.getElementById("lastbit").style.display="block";
 			document.getElementById("searchloc").value = sessionStorage.getItem("startlocaddr");
+			setTimeout(function(){
+			document.getElementById("loadingcontainer").style.display="none"; document.getElementById("bigcontainer").style.display="block";
+			},2000);	
 	}else{		
-		$("#demo03").trigger('click');	
+		$("#demo03").trigger('click');
+	setTimeout(function(){
+	 document.getElementById("loadingcontainer").style.display="none"; document.getElementById("bigcontainer").style.display="block";	
+	},3000);	
 	}	
 	shwdetls()
 	});
 
-	function showtour(){		
-		var tourinterval = setInterval(function(){
-		if(hiname == 1){
-		var tour = new Tour({
-        storage: false,		
-		steps: [
-         {
-    orphan: true,
-    title: "What is BECK Friends?",
-	backdrop:true,
-    content: "A global peer-to-peer marketplace for sending anything anywhere economically with an opportunity to earn as you travel"
-  }
-  /*,   {
-    element: "#locasion", 
-    title: "Change Locations",
-	placement: "bottom",
-	backdrop:true,
-    content: "Search various places to see the Requests there"
-  },
-  {
-    element: "#map", 
-    title: "Live Requests",
-	placement: "bottom",
-	backdrop:true,
-    content: "The details of Live Requests appear here. Use the left and right arrow to navigate across them"
-  },
-  {
-    element: "#add",
-    title: "New Request",
-	placement: "bottom",
-	backdrop:true,
-    content: "You can post a Request when you want to send"
-  },
-  {
-    element: "#mnulft",
-    title: "Menu",	
-	placement: "bottom",
-	backdrop:true,
-    content: "You can edit your profile & look at the details of previous requests"
-  },
-  {
-    element: "#signleft",
-    title: "Login",	
-	placement: "bottom",
-	backdrop:true,
-    content: "Finally, Login with Facebook for posting with us"
-  }
-  */
-        ]
-    }).init().start(true);   
-	clearInterval(tourinterval);
-		}
-		else{}
-		},1000);
-	}
+	
   
 	function makeid(){
     var text = "";
@@ -1009,7 +1017,7 @@ $(document).ready(function(){
 				$('#signinbtnn').click();		
 			}else{
 				mailconfirm(usremail,passwd); $('body').plainOverlay('hide'); unverf = 1;
-						swal("Verification mail sent!", "Please click on the link sent to your Email to complete Account Creation", "success");
+						//swal("Verification mail sent!", "Please click on the link sent to your Email to complete Account Creation", "success");
 						firebaseRef.child("unverified").child(usrnewmail).child("account").update({usrimg:usrimg,usrname:usrname, usremail:usremail, usrid:usrnewmail});	
 						usrid = usrnewmail; var regsclbck = "New user registered on friends : "+usrname+" "+usremail;
 						loggedin = 1; 
@@ -1017,13 +1025,13 @@ $(document).ready(function(){
 				document.getElementById("namehdr").innerHTML = 'Hi ' + usrname.split(" ")[0].substring(0, 10);		 
 				document.getElementById("namehdr2").style.display = "inline-block"; document.getElementById("signleft").style.display = "none";
 				document.getElementById("profile_img").src = usrimg; $('body').plainOverlay('hide');
-				$('#myanchor').click();						
+				$('#myanchor').click();	start();					
 			}; 			
 		});
 	}
 	
 	function loginmail(){
-		if(document.getElementById("signin-email").value==""||document.getElementById("signin-password").value==""){
+		if(document.getElementById("signup-email").value==""||document.getElementById("signup-password").value==""){
 			swal({   title: "Insufficient Details",   text: "Oops! Please fill all details for Signing In",   type: "error",   confirmButtonText: "OK" });
 			return;
 		}
@@ -1032,8 +1040,8 @@ $(document).ready(function(){
 			fillColor: '#000',
 			progress: function() { return $('<div style="font-size:40px;color:#fff;font-weight:bold">Working...</div>'); }
 		});		
-		usremail = document.getElementById("signin-email").value;
-		passwd = document.getElementById("signin-password").value;
+		usremail = document.getElementById("signup-email").value;
+		passwd = document.getElementById("signup-password").value;
 		usrnewmail = String(usremail).replace(/[^a-zA-Z0-9]/g, ' ');
 		firebaseRef.authWithPassword({email:usremail, password : passwd}, function(error, authData) {
 		if (error) {
@@ -1078,6 +1086,21 @@ $(document).ready(function(){
 			swal({   title: "Update number",   text: "Please update to your latest contact number", html: true,   type: "warning",   showCancelButton: true,   confirmButtonColor: "#2bb1de",   confirmButtonText: "Update it",   closeOnConfirm: false}, function(){ smsending() })
 		}
 	}
+	
+	function startScrolling(modifier, step) {
+        if (scrollHandle === 0) {
+            scrollHandle = setInterval(function () {
+                var newOffset = parent.scrollLeft() + (scrollStep * modifier);
+
+                parent.scrollLeft(newOffset);
+            }, 10);
+        }
+    }
+
+    function stopScrolling() {
+        clearInterval(scrollHandle);
+        scrollHandle = 0;
+    }
 	
 	function smsending(){
 		var distinterval = setInterval(function(){
@@ -1761,7 +1784,7 @@ $(document).ready(function(){
 	
 	function callautoinit(){		
 		var autocomplete = new google.maps.places.Autocomplete(document.getElementById('searchlocinit'));
-        autocomplete.bindTo('bounds', map); 	
+		autocomplete.bindTo('bounds', map); 	
 		autocomplete.addListener('place_changed', function() {
 		  var place = autocomplete.getPlace();
           if (!place.geometry) {

@@ -9,8 +9,9 @@
 	var newflg=0; var unverf = 0; var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
 	var startlat,startlng,endlat,endlng; var accptrid,accptrname,accptrphone,accptrfbid,accptrlinkdid,accptrgooglid;
 	var notif1=0, notif2=0; var accptrid,accptrname,accptrphone,accptrfbid,accptrlinkdid,accptrgooglid,pname,paddr,pno,dname,daddr,dno;
-	
+	var showthetour = 0;
 	app.controller('AppController', ["$scope", "$firebaseArray", "$firebaseObject", function($scope, $firebaseArray, $firebaseObject) {
+		document.getElementsByTagName("body")[0].style.display='block';
 		$scope.post2 = function(){
 			postctr = 1;
 			if(loggedin==1){ 
@@ -28,6 +29,7 @@
 		$scope.approvefrnd = function(){
 				$scope.hidedlg('list.html');
 				swal({   title: "Confirm BECK Friend",   text: "Are you sure you want to confirm this person to carry your package?",   type: "info",   showCancelButton: true,   closeOnConfirm: false,   showLoaderOnConfirm: true, }, function(){   		
+				myNavigator.pushPage('approvefrnd.html', { animation : 'none' } );
 				var actionz = "BECK friend "+ accptrname +" was selected for order: " + idpckgmatch;
 				mailcall(actionz,accptrid,accptrphone); mailcallmatch2(acceptemail,accptrname,pname,paddr,pno,dname,daddr,dno);
 				smsmatchsuppl(accptrphone); mailcallmatch(usrname,usremail,accptrname,acceptemail,accptrphone);
@@ -36,36 +38,14 @@
 				firebaseRef.child("users").child(accptrid).child("accepts").child(idpckgmatch).update({"status":"Approved"}).then(function() {
 				firebaseRef.child("users").child(usrid).child("posts").child(idpckgmatch).child("acceptors").remove();
 				geoFire.remove(idpckgmatch);	
-				myNavigator.popPage('track.html', { animation : 'none' } ); myNavigator.popPage('posted.html', { animation : 'none' } );
+				setTimeout(function(){
+				myNavigator.popPage('approvefrnd.html', { animation : 'none' } ); myNavigator.popPage('track.html', { animation : 'none' } ); myNavigator.popPage('posted.html', { animation : 'none' } );
 				swal("Succesfully Connected", "The details of the BECK Friend you approved for this request has been sent to you through SMS & Email", "success");
+				},3000)
 				});		
 			});	
 		}
-		/*
-		$scope.approvefrnd = function(id){			
-			var number = $("input:radio[name='select']:checked").val();
-			if(number === undefined){
-				swal("Select a BECK FRIEND", "Please select the BECK friend who would complete your request")
-			}else{
-				var actionz = "BECK friend "+ $scope.acceptors[number].usrname +" was selected for order: " + idpckgmatch;
-				myNavigator.pushPage('confirm.html', { animation : 'none' } );
-				mailcall(actionz,$scope.acceptors[number].usrid,$scope.acceptors[number].usrphone);
-				smsmatchsuppl($scope.acceptors[number].usrphone); 
-				smsmatchdmnd(usrphone,$scope.acceptors[number].usrname,$scope.acceptors[number].usrphone);
-				var otherid = $scope.acceptors[number].id;				
-				firebaseRef.child("users").child(usrid).child("posts").child(idpckgmatch).update({"status":"Approved & Connected"});
-				firebaseRef.child("users").child(otherid).child("accepts").child(idpckgmatch).update({"status":"Approved"}).then(function() {
-				geoFire.remove(idpckgmatch);					
-				setTimeout(function(){
-		google.maps.event.trigger(map, 'resize');
-		swal("Succesfully Connected", "The details of the BECK Friend you approved for this request has been sent you through SMS", "success");
-		rfrshresults(map.getCenter());
-		},2000);
-					myNavigator.popPage('confirm.html', { animation : 'none' } ); myNavigator.popPage('track.html', { animation : 'none' } ); myNavigator.popPage('posted.html', { animation : 'none' } );
-				});				
-			}
-		}
-		*/
+		
 		$scope.fillboxes = function(detail){		
 		imagz="";
 		myNavigator.pushPage('track.html', { animation : 'push' } );
@@ -186,7 +166,7 @@
 		},100);
 		}
 	
-			
+    	
 			
 		$scope.accept2 = function(){
 		 acceptctr = 1;
@@ -201,6 +181,10 @@
 		var interval = setInterval(function(){
 		if(typeof usrid === 'undefined'){}
 		else{
+		firebaseRef.child("users").child(usrid).child("accepts").child(arrPckgs[rsltshow].id).once("value", function(snapshot){	
+		if(snapshot.val()){
+			swal("Oops", "You can't accept the same request twice", "error"); clearInterval(interval); return;  			
+		}else{	
 		myNavigator.pushPage('accept.html', { animation : 'none' } );
 		clearInterval(interval);
 		firebaseRef.child("users").child(usrid).child("accepts").child(arrPckgs[rsltshow].id).update(arrPckgs[rsltshow]);
@@ -215,7 +199,9 @@
   		arraccepts.push(arrPckgs[rsltshow].id);
 		rfrshresults(map.getCenter());
 		})			
-		};		
+		};
+		})		
+		}
 		},2000);		
 		}
 		}else{
@@ -240,7 +226,7 @@
 			clearInterval(intervall);			
 			$scope.accepts = $firebaseArray(firebaseRef.child("users").child(usrid).child("accepts"));			
 			$scope.accepts.$loaded().then(function(arr){
-				
+				if(arr.$getRecord("notification")){
 				if(arr.$getRecord("notification").$value == "no"){
 					document.getElementById("notif1").style.display="none";
 				}
@@ -248,11 +234,13 @@
 					notif1 = 1;
 					document.getElementById("notif1").style.display="inline";
 					document.getElementById("notif").style.display="inline";
-				}			
+				}
+				}				
 			});
 			
 		$scope.posts = $firebaseArray(firebaseRef.child("users").child(usrid).child("posts"));
-		$scope.posts.$loaded().then(function(arr){				
+		$scope.posts.$loaded().then(function(arr){	
+			if(arr.$getRecord("notification")){		
 				if(arr.$getRecord("notification").$value == "no"){
 					document.getElementById("notif2").style.display="none";
 				}
@@ -260,7 +248,8 @@
 					notif2 = 1;
 					document.getElementById("notif2").style.display="inline";
 					document.getElementById("notif").style.display="inline";
-				}	
+				}
+			}
 		});
 		$scope.googleconnect = $firebaseArray(firebaseRef.child("users").child(usrid).child("account").child("google"));
 		$scope.accountz = $firebaseObject(firebaseRef.child("users").child(usrid).child("account"));
@@ -311,13 +300,16 @@ function getWords(str) {
    }
 var underverf = 0;
 $(document).ready(function($){
+	
 	var value = readCookie('beckusrmail');
 	if(value){
 		checkfirebase(value);
 	}else{
+		showthetour = 1;
 		var linkref = String(getQueryVariable('id'));
 		if(linkref == 'undefined'){
-			document.getElementById("signleft").style.display = "inline-block";
+			
+			document.getElementById("signleft").style.display = "inline";
 		}else{
 			var decodedString = String(Base64.decode(linkref));
 			document.cookie = "beckusrmail="+decodedString+"; expires=Wed, 14 Feb 2029 12:00:00 UTC";
@@ -677,7 +669,7 @@ geoQuery.on("key_exited", function(vehicleId, vehicleLocation) {
 	
 	function getLocation() {
 	if (navigator.geolocation) {
-		document.getElementsByTagName("body")[0].style.display='none';		
+		//document.getElementsByTagName("body")[0].style.display='none';		
 		navigator.geolocation.getCurrentPosition(showPosition,onerror,{maximumAge:600000});
     }
 	}
@@ -947,17 +939,27 @@ function move2(num) {
 	}
 	
 
-	function showPosition(position) {			
+	function showPosition(position) {
+	setTimeout(function(){
+		document.getElementById("loadingcontainer").style.display="none"; document.getElementById("bigcontainer").style.display="block";
+	},500);		
 		map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-		setTimeout(function(){document.getElementsByTagName("body")[0].style.display='block'},100);
+		//setTimeout(function(){document.getElementsByTagName("body")[0].style.display='block'},100);
 		map.setZoom(11); ntfnd = 0;		
 		getReverseGeocodingData(position.coords.latitude, position.coords.longitude);
 		geoQuery.updateCriteria({center: [position.coords.latitude, position.coords.longitude],  radius: 30});
+		if (showthetour==1) showtour();
+		
+		$('body').plainOverlay('show',{
+			opacity:0.8,
+			fillColor: '#000',
+			progress: function() { return $('<div style="font-size:40px;color:#fff;font-weight:bold">Loading...</div>'); }
+		});
 	}
-	 /*
+	
 	function showtour(){		
 		var tourinterval = setInterval(function(){
-		if(hiname == 1){
+		
 		var tour = new Tour({
         storage: false,		
 		steps: [
@@ -988,13 +990,6 @@ function move2(num) {
     content: "You can post a Request when you want to send anything anywhere"
   },
   {
-    element: "#mnulft",
-    title: "Menu",	
-	placement: "bottom",
-	backdrop:true,
-    content: "You can edit your profile & look at the details of previous requests"
-  },
-  {
     element: "#signleft",
     title: "Login",	
 	placement: "bottom",
@@ -1004,13 +999,14 @@ function move2(num) {
         ]
     }).init().start(true);   
 	clearInterval(tourinterval);
-		}
-		else{}
 		},1000);
 	}
-   */
+   
 	function onerror(err){		
-		ntfnd = 1; document.getElementsByTagName("body")[0].style.display='block'; loadauto2();			
+		ntfnd = 1;  loadauto2();
+		setTimeout(function(){
+		 document.getElementById("loadingcontainer").style.display="none"; document.getElementById("bigcontainer").style.display="block";
+	},1000);			
 	}
 	
 	function loadauto2(){
@@ -1041,7 +1037,12 @@ function move2(num) {
 		  google.maps.event.trigger(map, 'resize');
 		 map.setCenter(center);map.setZoom(11);
 		geoQuery.updateCriteria({center: [center.lat(), center.lng()],  radius: 30});
-		// showtour();
+		if (showthetour==1) showtour();
+		$('body').plainOverlay('show',{
+			opacity:0.8,
+			fillColor: '#000',
+			progress: function() { return $('<div style="font-size:40px;color:#fff;font-weight:bold">Working...</div>'); }
+		});
 	  },1500)
     }	
 	});		
@@ -1057,6 +1058,7 @@ function move2(num) {
 		}else if (geoQuery.radius()==30){
 			geoQuery.updateCriteria({radius: 60});
 		}else{
+		$('body').plainOverlay('hide');
 		setTimeout(function(){swal({   title: "No Live Requests",   text: "Presently there are no live requests around this location. You can add a request here if you want or search live requests for another location",   type: "warning", showCancelButton: false });
 		},3000);
 		document.getElementById("rqstgist").style.display="none";
@@ -1065,7 +1067,7 @@ function move2(num) {
 	}
 	var interval = setInterval(function(){
 	if(arrPckgs.length == nofkeys && nofkeys!=0 && acceptsloaded==1){			
-		clearInterval(interval);
+		clearInterval(interval); $('body').plainOverlay('hide');
 		if(flgg==0)
 		{flgg=1;
 		}
@@ -1082,6 +1084,11 @@ function move2(num) {
 		});
 		nofkeys = arrPckgs.length;
 		if(nofkeys==0){
+			$('body').plainOverlay('show',{
+			opacity:0.8,
+			fillColor: '#000',
+			progress: function() { return $('<div style="font-size:40px;color:#fff;font-weight:bold">Searching...</div>'); }
+		});
 			document.getElementById("pckgctr").innerHTML = "Searching More...";
 			document.getElementById("rqstgist").style.display="none";
 			rfrshresults(mycenter);
@@ -1091,23 +1098,18 @@ function move2(num) {
 		  rsltshow = 0;
 		  if(path) path.setMap(null);
 		  map.setCenter(mycenter);map.setZoom(12);ntfnd=0;
-			if(geoQuery.radius()==30){
-			geoQuery.updateCriteria({radius: 300});
-		}else if(geoQuery.radius()==300){
-			geoQuery.updateCriteria({radius: 700});
-		}else if(geoQuery.radius()==700){
-			geoQuery.updateCriteria({radius: 1000});
-		}else if(geoQuery.radius()==1000){
-			geoQuery.updateCriteria({radius: 1500});
-		}else if(geoQuery.radius()==1500){
-			geoQuery.updateCriteria({radius: 3500});
-		}else if(geoQuery.radius()==3500){
-			geoQuery.updateCriteria({radius: 5000});
+			if (geoQuery.radius()==15){
+			geoQuery.updateCriteria({radius: 30});
+		}else if (geoQuery.radius()==30){
+			geoQuery.updateCriteria({radius: 60});
 		}else{
+		$('body').plainOverlay('hide');
 		document.getElementById("pckgctr").innerHTML = "No Requests Found";
 		setTimeout(function(){swal({   title: "No Live Requests",   text: "Presently there are no live requests around this location. You can add a request here if you want or search live requests for another location",   timer: 8000 })},3000);		
 		}	
     	}else{
+			
+			$('body').plainOverlay('hide'); 
 			document.getElementById("prevbtn").style.display="none"; showreslt(0);
 			drawroute(arrPckgs[0].pickuplat, arrPckgs[0].pickuplng, arrPckgs[0].delvlat, arrPckgs[0].delvlng);	
 		}
@@ -1140,7 +1142,11 @@ function move2(num) {
 	}
 	
 	function rfrshresults(center){
-		
+		$('body').plainOverlay('show',{
+			opacity:0.8,
+			fillColor: '#000',
+			progress: function() { return $('<div style="font-size:40px;color:#fff;font-weight:bold">Working...</div>'); }
+		});
 			for (var i = 0; i < hotSpotMapMarkers.length; i++)
 			hotSpotMapMarkers[i].setMap(null);
 		  document.getElementById("rqstgist").style.display="none";
@@ -1640,7 +1646,7 @@ function move2(num) {
 				usrimg = snapshot.child("usrimg").val(); document.getElementById("profile_img").src = usrimg;
 				loggedin = 1; document.cookie = "beckusrmail="+usremail+"; expires=Wed, 14 Feb 2029 12:00:00 UTC";
 				document.getElementById("namehdr").innerHTML = 'Hi ' + usrname.split(" ")[0].substring(0, 10); document.getElementById("mnulogin").style.display = "none";	document.getElementById("mnuloggedin").style.display = "block";	 
-				document.getElementById("profile_name").innerHTML = usrname; document.getElementById("signleft").style.display = "none";
+				document.getElementById("profile_name").innerHTML = usrname; document.getElementById("signleft").style.display = "none"; document.getElementById("namehdr").style.display = "inline";
 				
 			}		
 		});
@@ -1664,7 +1670,7 @@ function move2(num) {
 				loggedin = 1; document.cookie = "beckusrmail="+usremail+"; expires=Wed, 14 Feb 2029 12:00:00 UTC"; $('#myanchor').click();
 				if(postctr==1){ $("#posting").click(); postctr=0; }else if(acceptctr==1){ $("#accepting").click(); acceptctr=0};
 				document.getElementById("profile_img").src = usrimg; document.getElementById("namehdr").innerHTML = 'Hi ' + usrname.split(" ")[0].substring(0, 10);		 
-				document.getElementById("profile_name").innerHTML = usrname; document.getElementById("signleft").style.display = "none"; $('body').plainOverlay('hide');	
+				document.getElementById("profile_name").innerHTML = usrname; document.getElementById("signleft").style.display = "none"; $('body').plainOverlay('hide'); document.getElementById("namehdr").style.display = "inline";
 				if(snapshot.child("idforverify").child("first").val()){
 					document.getElementById("verifbckg1").style.background = "url('"+snapshot.child("idforverify").child("first").val()+"') center/contain no-repeat";
 					document.getElementById("verfwrt").style.display = "none";
@@ -1686,7 +1692,7 @@ function move2(num) {
 			$('#myanchor').click();
 			usrimg = snapshot.child("usrimg").val(); document.getElementById("profile_img").src = usrimg; $('body').plainOverlay('hide');	
 			document.getElementById("namehdr").innerHTML = 'Hi ' + usrname.split(" ")[0].substring(0, 10);
-			document.getElementById("profile_name").innerHTML = usrname; document.getElementById("signleft").style.display = "none";
+			document.getElementById("profile_name").innerHTML = usrname; document.getElementById("signleft").style.display = "none"; document.getElementById("namehdr").style.display = "inline";
 			}			
 		});
 	}
@@ -2006,7 +2012,7 @@ function move2(num) {
 
 	
 	function loginmail(){
-		if(document.getElementById("signin-email").value==""||document.getElementById("signin-password").value==""){
+		if(document.getElementById("signup-email").value==""||document.getElementById("signup-password").value==""){
 			swal({   title: "Insufficient Details",   text: "Oops! Please fill all details for Signing In",   type: "error",   confirmButtonText: "OK" });
 			return;
 		}
@@ -2015,8 +2021,8 @@ function move2(num) {
 			fillColor: '#000',
 			progress: function() { return $('<div style="font-size:40px;color:#fff;font-weight:bold">Working...</div>'); }
 		});		
-		usremail = document.getElementById("signin-email").value;
-		passwd = document.getElementById("signin-password").value;
+		usremail = document.getElementById("signup-email").value;
+		passwd = document.getElementById("signup-password").value;
 		usrnewmail = String(usremail).replace(/[^a-zA-Z0-9]/g, ' ');
 		firebaseRef.authWithPassword({email:usremail, password : passwd}, function(error, authData) {
 		if (error) {
@@ -2034,7 +2040,7 @@ function move2(num) {
 				loggedin = 1; document.cookie = "beckusrmail="+usremail+"; expires=Wed, 14 Feb 2029 12:00:00 UTC";
 				$('#myanchor').click(); $('body').plainOverlay('hide');	if(postctr==1){ $("#posting").click(); postctr=0; }else if(acceptctr==1){ $("#accepting").click(); acceptctr=0};
 				document.getElementById("namehdr").innerHTML = 'Hi ' + usrname.split(" ")[0].substring(0, 10);		 
-				document.getElementById("profile_name").innerHTML = usrname; document.getElementById("signleft").style.display = "none";
+				document.getElementById("profile_name").innerHTML = usrname; document.getElementById("signleft").style.display = "none"; document.getElementById("namehdr").style.display = "inline";
 				document.getElementById("profile_img").src = usrimg; $('body').plainOverlay('hide');
 			}else{
 				$('#signupbtnn').click();
@@ -2078,16 +2084,15 @@ function move2(num) {
 			}else{
 				mailconfirm(usremail,passwd);
 				$('body').plainOverlay('hide');
-						unverf=1; swal("Verification Email sent!", "Please click on the link sent to your Email to complete Account Creation", "success");
+						unverf=1; //swal("Verification Email sent!", "Please click on the link sent to your Email to complete Account Creation", "success");
 						firebaseRef.child("unverified").child(usrnewmail).child("account").update({usrimg:usrimg,usrname:usrname, usremail:usremail, usrid:usrnewmail, completed:0});	
-						//document.cookie = "beckusrmail="+usremail+"; expires=Wed, 14 Feb 2029 12:00:00 UTC";
 						usrid = usrnewmail; var regsclbck = "New user registered on friends : "+usrname+" "+usremail;
 						loggedin = 1; 
 				if(postctr==1){ $("#posting").click(); postctr=0; }else if(acceptctr==1){ $("#accepting").click(); acceptctr=0};
 				document.getElementById("namehdr").innerHTML = 'Hi ' + usrname.split(" ")[0].substring(0, 10);	document.getElementById("mnulogin").style.display = "none";	document.getElementById("mnuloggedin").style.display = "block";		 
-				document.getElementById("profile_name").innerHTML = usrname; document.getElementById("signleft").style.display = "none";
+				document.getElementById("profile_name").innerHTML = usrname; document.getElementById("signleft").style.display = "none"; document.getElementById("namehdr").style.display = "inline";
 				document.getElementById("profile_img").src = usrimg; $('body').plainOverlay('hide');
-				$('#myanchor').click();	$("button[data-role='end']").click();				
+				$('#myanchor').click();	$("button[data-role='end']").click(); start();		
 				
 			}; 			
 		});
